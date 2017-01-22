@@ -28,7 +28,6 @@ public class EmployeeController {
     public
     @ResponseBody
     boolean confirm(@PathVariable int id) {
-        System.out.println("Confirmed");
         return employeeService.confirmTask(id);
     }
 
@@ -36,7 +35,6 @@ public class EmployeeController {
     public
     @ResponseBody
     boolean complete(@PathVariable int id) {
-        System.out.println("Completed");
         return employeeService.completeTask(id);
     }
 
@@ -44,8 +42,6 @@ public class EmployeeController {
     public
     @ResponseBody
     ArrayList<Task> tasks() {
-        System.out.println("Returned");
-        System.out.println(employeeService.getEmployeeTasks());
         return employeeService.getEmployeeTasks();
     }
 

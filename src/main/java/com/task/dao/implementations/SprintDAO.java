@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SprintDAO implements ISprintDAO {
-    ConnectionPool connectionPool = new ConnectionPool();
+    private ConnectionPool connectionPool = new ConnectionPool();
 
     public ArrayList<Sprint> getSprintList(int projectID) {
         ArrayList<Sprint> list = new ArrayList<Sprint>();
@@ -94,7 +94,11 @@ public class SprintDAO implements ISprintDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE SPRINT SET COMPLETE = 1 WHERE ID = ?");
+                    .prepareStatement("UPDATE SPRINT SET COMPLETE = 1\n" +
+                            "WHERE ID = ? AND 0 NOT IN (SELECT COMPLETE\n" +
+                            "                           FROM TASK\n" +
+                            "                           WHERE SPRINT = ?)");
+            preparedStatement.setInt(1, sprintID);
             preparedStatement.setInt(1, sprintID);
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
