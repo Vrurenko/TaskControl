@@ -2,3 +2,4 @@
 2017-01-22 19:31:51 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/customer/true] in DispatcherServlet with name 'dispatcher'
 2017-01-22 19:31:51 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/customer/404.jpg] in DispatcherServlet with name 'dispatcher'
 2017-01-22 19:33:35 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/customer/true] in DispatcherServlet with name 'dispatcher'
+2017-01-22 22:52:45 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'dispatcher'

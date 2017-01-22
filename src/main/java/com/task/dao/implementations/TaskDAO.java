@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class TaskDAO implements ITaskDAO {
     private ConnectionPool connectionPool = new ConnectionPool();
@@ -267,12 +268,8 @@ public class TaskDAO implements ITaskDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE TASK\n" +
-                            "SET COMPLETE = 1\n" +
-                            "WHERE ID = ?\n" +
-                            "      AND 0 NOT IN (SELECT COMPLETE\n" +
-                            "                    FROM TASK\n" +
-                            "                    WHERE SUBTASK_OF = ?)");
+                    .prepareStatement("UPDATE TASK SET COMPLETE = 1 WHERE ID = ?\n" +
+                            " AND 0 NOT IN (SELECT COMPLETE FROM TASK WHERE SUBTASK_OF = ?)");
             preparedStatement.setInt(1, taskID);
             preparedStatement.setInt(2, taskID);
             result = preparedStatement.executeUpdate() > 0;
@@ -283,6 +280,54 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.releaseConnection(connection);
         }
         return result;
+    }
+
+    @Override
+    public boolean addTask(Task task, int projectID) {
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO TASK (NAME, ESTIMATE, END_DATE, SUBTASK_OF, SPRINT, QUALIFICATION) "
+                            + "VALUES (?, ?, ?, ?, ?, ?);");
+            preparedStatement.setString(1, task.getName());
+            preparedStatement.setInt(2, task.getEstimate());
+            preparedStatement.setDate(3, new java.sql.Date(task.getStartDate().getTime() + TimeUnit.DAYS.toMillis(task.getEstimate())));
+            preparedStatement.setInt(4, AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName()));
+            preparedStatement.setInt(5, AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(projectID));
+            preparedStatement.setInt(6, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(task.getQualification()));
+            result = preparedStatement.executeUpdate() > 0;
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException ex) {
+            System.out.println("SQLException in TaskDAO.addTask");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return result;
+    }
+
+    @Override
+    public int getTaskIdByName(String name) {
+        Connection connection = null;
+        int taskID = 0;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT ID FROM TASK WHERE NAME = ?");
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                taskID = resultSet.getInt("id");
+            }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException ex) {
+            System.out.println("SQLException in TaskDAO.getTaskIdByName");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return taskID;
     }
 
 }

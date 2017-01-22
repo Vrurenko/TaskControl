@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public interface ISprintDAO {
 
-    public ArrayList<Sprint> getSprintList(int projectID);
+    ArrayList<Sprint> getSprintList(int projectID);
 
-    public String getSprintNameByID(int id);
+    String getSprintNameByID(int id);
 
-    public boolean createSprint(Sprint sprint, int projectID);
+    boolean createSprint(Sprint sprint, int projectID);
 
-    public boolean closeSprint(int sprintID);
+    boolean closeSprint(int sprintID);
 
-    public int getLastSprintID(int sprintID);
+    int getLastSprintID(int projectID);
 
 }

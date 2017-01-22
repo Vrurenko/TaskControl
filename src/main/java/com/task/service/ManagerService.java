@@ -60,4 +60,10 @@ public class ManagerService {
         return AbstractDAOFactory.getDAOFactory().getSprintDAO().closeSprint(sprintID);
     }
 
+    public boolean addTask(Task task){
+        int sprintID = AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(getPrincipalProjectID());
+
+        return false; // TODO: 22.01.2017 Доделать
+    }
+
 }

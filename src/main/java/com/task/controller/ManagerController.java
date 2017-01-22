@@ -67,9 +67,8 @@ public class ManagerController {
     @RequestMapping(value = "/project-manager/sprint/add", method = RequestMethod.POST)
     public
     @ResponseBody
-    boolean addSprint(@ModelAttribute Sprint sprint, BindingResult result) {
-        System.out.println(sprint);
-        return !result.hasErrors() && managerService.createSprint(sprint);
+    boolean addSprint(@ModelAttribute Sprint sprint, BindingResult bindingResult) {
+        return !bindingResult.hasErrors() && managerService.createSprint(sprint);
     }
 
     @RequestMapping(value = "/project-manager/sprint/close", method = RequestMethod.POST)
@@ -79,4 +78,10 @@ public class ManagerController {
         return managerService.closeSprint();
     }
 
+    @RequestMapping(value = "/project-manager/task/add", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    boolean addTask(@ModelAttribute Task task, BindingResult bindingResult) {
+        return !bindingResult.hasErrors() && managerService.addTask(task);
+    }
 }
