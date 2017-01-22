@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TaskControl:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="planning-system.war">
+      <element id="artifact" artifact-name="TaskControl:war exploded" />
+    </root>
+  </artifact>
+</component>
