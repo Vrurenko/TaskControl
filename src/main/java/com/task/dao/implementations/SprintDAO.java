@@ -95,9 +95,7 @@ public class SprintDAO implements ISprintDAO {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("UPDATE SPRINT SET COMPLETE = 1\n" +
-                            "WHERE ID = ? AND 0 NOT IN (SELECT COMPLETE\n" +
-                            "                           FROM TASK\n" +
-                            "                           WHERE SPRINT = ?)");
+                            "WHERE ID = ? AND 0 NOT IN (SELECT COMPLETE  FROM TASK WHERE SPRINT = ?)");
             preparedStatement.setInt(1, sprintID);
             preparedStatement.setInt(1, sprintID);
             result = preparedStatement.executeUpdate() > 0;
