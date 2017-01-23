@@ -81,8 +81,8 @@
                         $("#taskTable > thead").append(thead);
 
                         for (i = 0; i < parseInt(response.length); i++) {
-                            var date1 = response[i].startDate.split("-");
-                            var date2 = response[i].endDate.split("-");
+                            var startDate = response[i].startDate.split("-");
+                            endDate = new Date().setDate(new Date(startDate[0], startDate[1], startDate[2]).getDate() + response[i].estimate);
                             var tr = '<tr ' + 'id="' + response[i].id + '"' + '>'
                                     + '<td>' + response[i].id + '</td>'
                                     + '<td>' + response[i].name + '</td>'
@@ -90,7 +90,7 @@
                                     + '<td>' + response[i].subTaskOf + '</td>'
                                     + '<td>' + response[i].startDate + '</td>'
                                     + '<td>' + response[i].endDate + '</td>'
-                                    + '<td>' + Math.abs(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / 864e5 + '</td>'
+                                    + '<td>' + (new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24) + '</td>'
                                     + '<td>' + response[i].qualification + '</td>'
                                     + '<td>' + response[i].complete + '</td>'
                                     + '</tr>';

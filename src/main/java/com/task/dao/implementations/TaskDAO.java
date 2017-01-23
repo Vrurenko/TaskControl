@@ -268,7 +268,7 @@ public class TaskDAO implements ITaskDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE TASK SET COMPLETE = 1 WHERE ID = ?\n" +
+                    .prepareStatement("UPDATE TASK SET COMPLETE = 1, END_DATE = SYSDATE  WHERE ID = ?\n" +
                             " AND 0 NOT IN (SELECT COMPLETE FROM TASK WHERE SUBTASK_OF = ?)");
             preparedStatement.setInt(1, taskID);
             preparedStatement.setInt(2, taskID);
@@ -289,14 +289,13 @@ public class TaskDAO implements ITaskDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO TASK (NAME, ESTIMATE, END_DATE, SUBTASK_OF, SPRINT, QUALIFICATION) "
+                    .prepareStatement("INSERT INTO TASK (NAME, ESTIMATE, SUBTASK_OF, SPRINT, QUALIFICATION) "
                             + "VALUES (?, ?, ?, ?, ?, ?);");
             preparedStatement.setString(1, task.getName());
             preparedStatement.setInt(2, task.getEstimate());
-            preparedStatement.setDate(3, new java.sql.Date(task.getStartDate().getTime() + TimeUnit.DAYS.toMillis(task.getEstimate())));
-            preparedStatement.setInt(4, AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName()));
-            preparedStatement.setInt(5, AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(projectID));
-            preparedStatement.setInt(6, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(task.getQualification()));
+            preparedStatement.setInt(3, AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName()));
+            preparedStatement.setInt(4, AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(projectID));
+            preparedStatement.setInt(5, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(task.getQualification()));
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
