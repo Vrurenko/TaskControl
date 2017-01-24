@@ -60,10 +60,18 @@ public class ManagerService {
         return AbstractDAOFactory.getDAOFactory().getSprintDAO().closeSprint(sprintID);
     }
 
+    public ArrayList<String> getQualifications(){
+        return AbstractDAOFactory.getDAOFactory().getQualificationDAO().getQualificationsList();
+    }
+
+    public ArrayList<String> getTaskNames(){
+        int lastSprintID = AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(getPrincipalProjectID());
+        return AbstractDAOFactory.getDAOFactory().getTaskDAO().getLastSprintTaskNames(lastSprintID);
+    }
+
     public boolean addTask(Task task){
         int sprintID = AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(getPrincipalProjectID());
-
-        return false; // TODO: 22.01.2017 Доделать
+        return AbstractDAOFactory.getDAOFactory().getTaskDAO().addTask(task, sprintID);
     }
 
 }

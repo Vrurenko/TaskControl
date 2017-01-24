@@ -27,8 +27,10 @@ public interface ITaskDAO {
 
     public boolean completeTaskByID(int taskID);
 
-    public boolean addTask(Task task, int projectID);
+    public boolean addTask(Task task, int sprintID);
 
     public int getTaskIdByName(String name);
+
+    public ArrayList<String> getLastSprintTaskNames(int sprintID);
 
 }

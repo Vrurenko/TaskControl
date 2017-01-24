@@ -283,18 +283,20 @@ public class TaskDAO implements ITaskDAO {
     }
 
     @Override
-    public boolean addTask(Task task, int projectID) {
+    public boolean addTask(Task task, int sprintID) {
         Connection connection = null;
         boolean result = false;
+        int subTask = 0;
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
                     .prepareStatement("INSERT INTO TASK (NAME, ESTIMATE, SUBTASK_OF, SPRINT, QUALIFICATION) "
-                            + "VALUES (?, ?, ?, ?, ?, ?);");
+                            + "VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, task.getName());
             preparedStatement.setInt(2, task.getEstimate());
-            preparedStatement.setInt(3, AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName()));
-            preparedStatement.setInt(4, AbstractDAOFactory.getDAOFactory().getSprintDAO().getLastSprintID(projectID));
+            subTask = AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName());
+            preparedStatement.setObject(3, (subTask == 0) ? null : subTask);
+            preparedStatement.setInt(4, sprintID);
             preparedStatement.setInt(5, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(task.getQualification()));
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
@@ -327,6 +329,29 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.releaseConnection(connection);
         }
         return taskID;
+    }
+
+    @Override
+    public ArrayList<String> getLastSprintTaskNames(int sprintID) {
+        ArrayList<String> list = new ArrayList<String>();
+        Connection connection = null;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT NAME FROM TASK WHERE SPRINT = ?");
+            preparedStatement.setInt(1, sprintID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(resultSet.getString("name"));
+            }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException ex) {
+            System.out.println("SQLException in TaskDAO.getLastSprintTaskNames");
+        } finally {
+            connectionPool.releaseConnection(connection);
+        }
+        return list;
     }
 
 }

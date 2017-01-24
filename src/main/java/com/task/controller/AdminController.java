@@ -9,7 +9,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -31,7 +30,7 @@ public class AdminController {
     public String saveProposal(@Valid Project project,
                                BindingResult bindingResult,
                                ModelMap model) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             model.addAttribute("proposalList", adminService.getProposalList());
             model.addAttribute("employeeList", adminService.getEmployeeList());
             return "admin";
@@ -39,22 +38,6 @@ public class AdminController {
         int customerID = AbstractDAOFactory.getDAOFactory().getProposalDAO().getCustomerIdByProposalId(31);
         String customer = AbstractDAOFactory.getDAOFactory().getUserDAO().getLoginById(customerID);
         project.setCustomer(customer);
-        adminService.acceptProposal(project);
-
-        return "redirect:/admin";
-    }
-
-
-    @RequestMapping(value = "/admin/", method = RequestMethod.POST)
-    public @ResponseBody String createProject(@Valid Project project,
-                        BindingResult bindingResult,
-                        ModelMap model) {
-        if (bindingResult.hasErrors()){
-            model.addAttribute("proposalList", adminService.getProposalList());
-            model.addAttribute("employeeList", adminService.getEmployeeList());
-            return "admin";
-        }
-        project.setCustomer("admin");
         adminService.acceptProposal(project);
 
         return "redirect:/admin";

@@ -94,10 +94,10 @@ public class SprintDAO implements ISprintDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("UPDATE SPRINT SET COMPLETE = 1\n" +
-                            "WHERE ID = ? AND 0 NOT IN (SELECT COMPLETE  FROM TASK WHERE SPRINT = ?)");
+                    .prepareStatement("UPDATE SPRINT SET COMPLETE = 1 WHERE ID = ? AND 0 NOT IN \n" +
+                            "(SELECT COMPLETE FROM TASK WHERE SPRINT = ?)");
             preparedStatement.setInt(1, sprintID);
-            preparedStatement.setInt(1, sprintID);
+            preparedStatement.setInt(2, sprintID);
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
