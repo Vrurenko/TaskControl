@@ -12,10 +12,12 @@
     <jsp:include page="header.jsp"/>
 </div>
 
-<a href="/admin"><h2>ADMIN</h2></a>
-<a href="/customer"><h2>CUSTOMER</h2></a>
-<a href="/employee"><h2>EMPLOYEE</h2></a>
-<a href="/project-manager"><h2>MANAGER</h2></a>
+
+    <a href="/admin"><h2>ADMIN</h2></a>
+    <a href="/customer"><h2>CUSTOMER</h2></a>
+    <a href="/employee"><h2>EMPLOYEE</h2></a>
+    <a href="/project-manager"><h2>MANAGER</h2></a>
+
 
 
 </body>

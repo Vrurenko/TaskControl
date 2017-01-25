@@ -10,13 +10,13 @@
     <mvc:annotation-driven/>
     <context:component-scan base-package="com.task"/>
 
-    <http use-expressions="true" auto-config="false">
+    <http use-expressions="true" auto-config="true">
         <!--we intercept request and make sure that login users with specific role can only access the pages-->
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_EMPLOYEE', 'ROLE_MANAGER')"/>
-        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/customer" access="hasRole('ROLE_CUSTOMER')"/>
-        <intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')"/>
-        <intercept-url pattern="/project-manager" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/customer*" access="hasRole('ROLE_CUSTOMER')"/>
+        <intercept-url pattern="/employee*" access="hasRole('ROLE_EMPLOYEE')"/>
+        <intercept-url pattern="/project-manager*" access="hasRole('ROLE_MANAGER')"/>
 
         <form-login login-page="/login"
                     default-target-url="/welcome"

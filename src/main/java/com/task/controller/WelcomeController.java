@@ -21,11 +21,6 @@ public class WelcomeController {
         return "welcome";
     }
 
-    @RequestMapping(value = "/excel", method = RequestMethod.GET)
-    public String excelTest(ModelMap model) {
-        model.addAttribute("load", false);
-        return "excel";
-    }
 
     @RequestMapping(value = "/excel/load", method = RequestMethod.GET)
     public String excelLoad(ModelMap model) {
