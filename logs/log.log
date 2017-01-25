@@ -1,1 +1,2 @@
 2017-01-24 15:44:49 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/project-manager/sprint/] in DispatcherServlet with name 'dispatcher'
+2017-01-24 23:39:33 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'dispatcher'
