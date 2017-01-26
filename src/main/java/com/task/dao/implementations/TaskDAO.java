@@ -7,10 +7,7 @@ import com.task.dao.interfaces.ITaskDAO;
 import com.task.model.Task;
 import com.task.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -294,8 +291,12 @@ public class TaskDAO implements ITaskDAO {
                             + "VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, task.getName());
             preparedStatement.setInt(2, task.getEstimate());
-            subTask = AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getName());
-            preparedStatement.setObject(3, (subTask == 0) ? null : subTask);
+            subTask = AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getSubTaskOf());
+            if (subTask == 0){
+                preparedStatement.setNull(3, Types.INTEGER);
+            } else {
+                preparedStatement.setInt(3, subTask);
+            }
             preparedStatement.setInt(4, sprintID);
             preparedStatement.setInt(5, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(task.getQualification()));
             result = preparedStatement.executeUpdate() > 0;
