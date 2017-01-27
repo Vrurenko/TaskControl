@@ -10,8 +10,8 @@
       <schema id="1" name="SLAVA">
         <object-id>50</object-id>
         <created-timestamp>2017-01-02.20:07:42</created-timestamp>
-        <modified-timestamp>2017-01-21.19:14:40</modified-timestamp>
-        <introspection-timestamp>2017-01-21.19:14:45</introspection-timestamp>
+        <modified-timestamp>2017-01-27.12:36:57</modified-timestamp>
+        <introspection-timestamp>2017-01-27.12:36:58</introspection-timestamp>
       </schema>
       <sequence id="2" parent="1" name="PROJECT_ID_SEQUENCE">
         <object-id>20191</object-id>
@@ -90,13 +90,13 @@
       <table id="12" parent="1" name="ROLE">
         <object-id>20178</object-id>
         <created-timestamp>2017-01-03.23:41:56</created-timestamp>
-        <modified-timestamp>2017-01-04.00:18:31</modified-timestamp>
+        <modified-timestamp>2017-01-27.12:36:57</modified-timestamp>
         <organization>HEAP</organization>
       </table>
       <table id="13" parent="1" name="SPRINT">
         <object-id>20192</object-id>
         <created-timestamp>2017-01-04.17:49:58</created-timestamp>
-        <modified-timestamp>2017-01-21.19:14:40</modified-timestamp>
+        <modified-timestamp>2017-01-22.11:03:27</modified-timestamp>
         <organization>HEAP</organization>
       </table>
       <table id="14" parent="1" name="TASK">
@@ -306,7 +306,12 @@
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(40)</data-type>
       </column>
-      <index id="47" parent="12" name="role_id_uindex">
+      <column id="47" parent="12" name="ALLOWED">
+        <mandatory>1</mandatory>
+        <data-type>NUMBER(1)</data-type>
+        <default-expression>NULL</default-expression>
+      </column>
+      <index id="48" parent="12" name="role_id_uindex">
         <object-id>20179</object-id>
         <created-timestamp>2017-01-03.23:41:56</created-timestamp>
         <modified-timestamp>2017-01-03.23:41:56</modified-timestamp>
@@ -315,7 +320,7 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <index id="48" parent="12" name="role_position_uindex">
+      <index id="49" parent="12" name="role_position_uindex">
         <object-id>20180</object-id>
         <created-timestamp>2017-01-03.23:41:56</created-timestamp>
         <modified-timestamp>2017-01-03.23:41:56</modified-timestamp>
@@ -324,40 +329,40 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="49" parent="12" name="ROLE_ID_PK">
+      <key id="50" parent="12" name="ROLE_ID_PK">
         <modified-timestamp>2017-01-04.00:18:31</modified-timestamp>
         <columns>ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>role_id_uindex</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="50" parent="13" name="ID">
+      <column id="51" parent="13" name="ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="51" parent="13" name="NAME">
+      <column id="52" parent="13" name="NAME">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(40)</data-type>
       </column>
-      <column id="52" parent="13" name="START_DATE">
+      <column id="53" parent="13" name="START_DATE">
         <mandatory>1</mandatory>
         <data-type>DATE</data-type>
         <default-expression>current_date</default-expression>
       </column>
-      <column id="53" parent="13" name="END_DATE">
+      <column id="54" parent="13" name="END_DATE">
         <data-type>DATE</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="54" parent="13" name="PROJECT">
+      <column id="55" parent="13" name="PROJECT">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="55" parent="13" name="COMPLETE">
+      <column id="56" parent="13" name="COMPLETE">
         <mandatory>1</mandatory>
         <data-type>NUMBER(1)</data-type>
         <default-expression>0</default-expression>
       </column>
-      <index id="56" parent="13" name="sprint_id_uindex">
+      <index id="57" parent="13" name="sprint_id_uindex">
         <object-id>20193</object-id>
         <created-timestamp>2017-01-04.17:49:58</created-timestamp>
         <modified-timestamp>2017-01-04.17:49:58</modified-timestamp>
@@ -366,7 +371,7 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <index id="57" parent="13" name="SPRINT_NAME_UINDEX">
+      <index id="58" parent="13" name="SPRINT_NAME_UINDEX">
         <object-id>20194</object-id>
         <created-timestamp>2017-01-04.17:50:56</created-timestamp>
         <modified-timestamp>2017-01-04.17:50:56</modified-timestamp>
@@ -375,14 +380,14 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="58" parent="13" name="SPRINT_ID_PK">
+      <key id="59" parent="13" name="SPRINT_ID_PK">
         <modified-timestamp>2017-01-04.17:50:11</modified-timestamp>
         <columns>ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>sprint_id_uindex</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="59" parent="13" name="SPRINT_PROJECT_FK">
+      <foreign-key id="60" parent="13" name="SPRINT_PROJECT_FK">
         <modified-timestamp>2017-01-04.17:55:26</modified-timestamp>
         <columns>PROJECT</columns>
         <initially-deferred>1</initially-deferred>
@@ -390,57 +395,57 @@
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="60" parent="13" name="SPRINT_ID_TRG">
+      <trigger id="61" parent="13" name="SPRINT_ID_TRG">
         <created-timestamp>2017-01-21.16:55:28</created-timestamp>
         <modified-timestamp>2017-01-21.16:55:28</modified-timestamp>
         <trig-events>I</trig-events>
         <trig-turn>BEFORE_ROW</trig-turn>
       </trigger>
-      <trigger id="61" parent="13" name="NEW_SPRINT_TRG">
-        <created-timestamp>2017-01-21.18:02:42</created-timestamp>
-        <modified-timestamp>2017-01-21.18:02:42</modified-timestamp>
+      <trigger id="62" parent="13" name="NEW_SPRINT_TRG">
+        <created-timestamp>2017-01-22.10:52:10</created-timestamp>
+        <modified-timestamp>2017-01-22.11:03:27</modified-timestamp>
         <trig-events>I</trig-events>
         <trig-turn>BEFORE_ROW</trig-turn>
       </trigger>
-      <column id="62" parent="14" name="ID">
+      <column id="63" parent="14" name="ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="63" parent="14" name="ESTIMATE">
+      <column id="64" parent="14" name="ESTIMATE">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="64" parent="14" name="NAME">
+      <column id="65" parent="14" name="NAME">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(60)</data-type>
       </column>
-      <column id="65" parent="14" name="START_DATE">
+      <column id="66" parent="14" name="START_DATE">
         <mandatory>1</mandatory>
         <data-type>DATE</data-type>
         <default-expression>current_date</default-expression>
       </column>
-      <column id="66" parent="14" name="END_DATE">
+      <column id="67" parent="14" name="END_DATE">
         <data-type>DATE</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="67" parent="14" name="SUBTASK_OF">
+      <column id="68" parent="14" name="SUBTASK_OF">
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="68" parent="14" name="SPRINT">
+      <column id="69" parent="14" name="SPRINT">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="69" parent="14" name="COMPLETE">
+      <column id="70" parent="14" name="COMPLETE">
         <mandatory>1</mandatory>
         <data-type>NUMBER(1)</data-type>
         <default-expression>0</default-expression>
       </column>
-      <column id="70" parent="14" name="QUALIFICATION">
+      <column id="71" parent="14" name="QUALIFICATION">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <index id="71" parent="14" name="task_id_uindex">
+      <index id="72" parent="14" name="task_id_uindex">
         <object-id>20197</object-id>
         <created-timestamp>2017-01-05.09:48:39</created-timestamp>
         <modified-timestamp>2017-01-05.09:48:39</modified-timestamp>
@@ -449,7 +454,7 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <index id="72" parent="14" name="TASK_NAME_UINDEX">
+      <index id="73" parent="14" name="TASK_NAME_UINDEX">
         <object-id>20198</object-id>
         <created-timestamp>2017-01-05.09:49:28</created-timestamp>
         <modified-timestamp>2017-01-05.09:49:28</modified-timestamp>
@@ -458,14 +463,14 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="73" parent="14" name="TASK_ID_PK">
+      <key id="74" parent="14" name="TASK_ID_PK">
         <modified-timestamp>2017-01-05.09:49:28</modified-timestamp>
         <columns>ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>task_id_uindex</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="74" parent="14" name="TASK_SUBTASK_FK">
+      <foreign-key id="75" parent="14" name="TASK_SUBTASK_FK">
         <modified-timestamp>2017-01-05.09:59:12</modified-timestamp>
         <columns>SUBTASK_OF</columns>
         <initially-deferred>1</initially-deferred>
@@ -473,14 +478,14 @@
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="75" parent="14" name="TASK_SPRINT_FK">
+      <foreign-key id="76" parent="14" name="TASK_SPRINT_FK">
         <modified-timestamp>2017-01-14.11:36:32</modified-timestamp>
         <columns>SPRINT</columns>
         <initially-deferred>1</initially-deferred>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="76" parent="14" name="TASK_QUALIFICATION_FK">
+      <foreign-key id="77" parent="14" name="TASK_QUALIFICATION_FK">
         <modified-timestamp>2017-01-19.17:47:34</modified-timestamp>
         <columns>QUALIFICATION</columns>
         <initially-deferred>1</initially-deferred>
@@ -488,47 +493,47 @@
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="77" parent="14" name="TASK_ID_TRG">
+      <trigger id="78" parent="14" name="TASK_ID_TRG">
         <created-timestamp>2017-01-18.17:31:40</created-timestamp>
         <modified-timestamp>2017-01-18.17:31:40</modified-timestamp>
         <trig-events>I</trig-events>
         <trig-turn>BEFORE_ROW</trig-turn>
       </trigger>
-      <trigger id="78" parent="14" name="TASK_SPRINT_TRG">
+      <trigger id="79" parent="14" name="TASK_SPRINT_TRG">
         <created-timestamp>2017-01-18.17:34:49</created-timestamp>
         <modified-timestamp>2017-01-19.15:41:42</modified-timestamp>
         <trig-events>I</trig-events>
         <trig-turn>BEFORE_ROW</trig-turn>
       </trigger>
-      <column id="79" parent="15" name="ID">
+      <column id="80" parent="15" name="ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="80" parent="15" name="NAME">
+      <column id="81" parent="15" name="NAME">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(60)</data-type>
       </column>
-      <column id="81" parent="15" name="TASK">
+      <column id="82" parent="15" name="TASK">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="82" parent="15" name="REASON">
+      <column id="83" parent="15" name="REASON">
         <data-type>VARCHAR2(200)</data-type>
       </column>
-      <column id="83" parent="15" name="NEW_END_DATE">
+      <column id="84" parent="15" name="NEW_END_DATE">
         <mandatory>1</mandatory>
         <data-type>DATE</data-type>
       </column>
-      <column id="84" parent="15" name="EMPLOYEE">
+      <column id="85" parent="15" name="EMPLOYEE">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="85" parent="15" name="APPROVED">
+      <column id="86" parent="15" name="APPROVED">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
         <default-expression>0</default-expression>
       </column>
-      <index id="86" parent="15" name="ticket_id_uindex">
+      <index id="87" parent="15" name="ticket_id_uindex">
         <object-id>20200</object-id>
         <created-timestamp>2017-01-05.10:00:14</created-timestamp>
         <modified-timestamp>2017-01-05.10:00:14</modified-timestamp>
@@ -537,41 +542,41 @@
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="87" parent="15" name="TICKET_ID_PK">
+      <key id="88" parent="15" name="TICKET_ID_PK">
         <modified-timestamp>2017-01-05.10:01:01</modified-timestamp>
         <columns>ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>ticket_id_uindex</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="88" parent="15" name="TICKET_TASK_FK">
+      <foreign-key id="89" parent="15" name="TICKET_TASK_FK">
         <modified-timestamp>2017-01-05.10:03:55</modified-timestamp>
         <columns>TASK</columns>
         <initially-deferred>1</initially-deferred>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="89" parent="15" name="TICKET_EMPLOYEE_FK">
+      <foreign-key id="90" parent="15" name="TICKET_EMPLOYEE_FK">
         <modified-timestamp>2017-01-05.10:05:02</modified-timestamp>
         <columns>EMPLOYEE</columns>
         <initially-deferred>1</initially-deferred>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="90" parent="16" name="USER_ID">
+      <column id="91" parent="16" name="USER_ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="91" parent="16" name="TASK_ID">
+      <column id="92" parent="16" name="TASK_ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="92" parent="16" name="ACCEPTED">
+      <column id="93" parent="16" name="ACCEPTED">
         <mandatory>1</mandatory>
         <data-type>NUMBER(1)</data-type>
         <default-expression>0</default-expression>
       </column>
-      <index id="93" parent="16" name="UNIQUE_USER_TASK">
+      <index id="94" parent="16" name="UNIQUE_USER_TASK">
         <object-id>20557</object-id>
         <created-timestamp>2017-01-14.11:23:04</created-timestamp>
         <modified-timestamp>2017-01-14.11:23:04</modified-timestamp>
@@ -581,14 +586,14 @@ TASK_ID</columns>
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="94" parent="16" name="UNIQUE_USER_TASK">
+      <key id="95" parent="16" name="UNIQUE_USER_TASK">
         <modified-timestamp>2017-01-14.11:23:04</modified-timestamp>
         <columns>USER_ID
 TASK_ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>UNIQUE_USER_TASK</underlying-index>
       </key>
-      <foreign-key id="95" parent="16" name="USER_TASK_MAP_USER_FK">
+      <foreign-key id="96" parent="16" name="USER_TASK_MAP_USER_FK">
         <modified-timestamp>2017-01-14.11:20:31</modified-timestamp>
         <columns>USER_ID</columns>
         <initially-deferred>1</initially-deferred>
@@ -596,46 +601,46 @@ TASK_ID</columns>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="96" parent="16" name="USER_TASK_MAP_TASK_FK">
+      <foreign-key id="97" parent="16" name="USER_TASK_MAP_TASK_FK">
         <modified-timestamp>2017-01-14.11:20:31</modified-timestamp>
         <columns>TASK_ID</columns>
         <initially-deferred>1</initially-deferred>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="97" parent="17" name="ID">
+      <column id="98" parent="17" name="ID">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="98" parent="17" name="NAME">
+      <column id="99" parent="17" name="NAME">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(50)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="99" parent="17" name="SURNAME">
+      <column id="100" parent="17" name="SURNAME">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(60)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="100" parent="17" name="ROLE">
+      <column id="101" parent="17" name="ROLE">
         <mandatory>1</mandatory>
         <data-type>NUMBER(*)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="101" parent="17" name="QUALIFICATION">
+      <column id="102" parent="17" name="QUALIFICATION">
         <data-type>NUMBER(*)</data-type>
       </column>
-      <column id="102" parent="17" name="LOGIN">
+      <column id="103" parent="17" name="LOGIN">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(255)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <column id="103" parent="17" name="PASSWORD">
+      <column id="104" parent="17" name="PASSWORD">
         <mandatory>1</mandatory>
         <data-type>VARCHAR2(255)</data-type>
         <default-expression>NULL</default-expression>
       </column>
-      <index id="104" parent="17" name="USER_ID_UINDEX">
+      <index id="105" parent="17" name="USER_ID_UINDEX">
         <object-id>20167</object-id>
         <created-timestamp>2017-01-02.20:26:49</created-timestamp>
         <modified-timestamp>2017-01-02.20:26:49</modified-timestamp>
@@ -644,7 +649,7 @@ TASK_ID</columns>
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <index id="105" parent="17" name="USERS_LOGIN_UINDEX">
+      <index id="106" parent="17" name="USERS_LOGIN_UINDEX">
         <object-id>20666</object-id>
         <created-timestamp>2017-01-16.16:54:41</created-timestamp>
         <modified-timestamp>2017-01-16.16:54:41</modified-timestamp>
@@ -653,22 +658,21 @@ TASK_ID</columns>
         <unique>1</unique>
         <tablespace-name>SYSTEM</tablespace-name>
       </index>
-      <key id="106" parent="17" name="USER_ID_PK">
+      <key id="107" parent="17" name="USER_ID_PK">
         <modified-timestamp>2017-01-02.20:26:49</modified-timestamp>
         <columns>ID</columns>
         <initially-deferred>1</initially-deferred>
         <underlying-index>USER_ID_UINDEX</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="107" parent="17" name="USER_ROLE_FK">
+      <foreign-key id="108" parent="17" name="USER_ROLE_FK">
         <modified-timestamp>2017-01-04.00:30:19</modified-timestamp>
         <columns>ROLE</columns>
         <initially-deferred>1</initially-deferred>
-        <ref-key>~.ROLE.ROLE_ID_PK</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="108" parent="17" name="USER_QUAL_FK">
+      <foreign-key id="109" parent="17" name="USER_QUAL_FK">
         <modified-timestamp>2017-01-04.00:30:36</modified-timestamp>
         <columns>QUALIFICATION</columns>
         <initially-deferred>1</initially-deferred>
@@ -676,7 +680,7 @@ TASK_ID</columns>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <trigger id="109" parent="17" name="USERS_ID_TRG">
+      <trigger id="110" parent="17" name="USERS_ID_TRG">
         <created-timestamp>2017-01-14.15:11:41</created-timestamp>
         <modified-timestamp>2017-01-14.15:11:41</modified-timestamp>
         <trig-events>I</trig-events>

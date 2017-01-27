@@ -55,4 +55,33 @@
 </form:form>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+    var hideQualifications = function () {
+        $('label[for="qualification"]').hide();
+        $("#qualification").hide();
+        $("#qualification").prepend('<option value="NONE" selected>--- Select ---</option>');
+    };
+    var showQualifications = function () {
+        $('label[for="qualification"]').show();
+        $("#qualification").show();
+        $("#qualification option[value='NONE']").remove();
+    }
+
+    $(document).ready(function () {
+
+        hideQualifications();
+
+        $("#role").change(function () {
+            if ($(this).val() === 'ROLE_EMPLOYEE') {
+                showQualifications();
+            } else {
+                hideQualifications();
+            }
+        })
+    });
+</script>
+
 </html>

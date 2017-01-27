@@ -31,6 +31,27 @@ public class RoleDAO implements IRoleDAO {
     }
 
     @Override
+    public ArrayList<String> getAllowedRolesList() {
+        ArrayList<String> list = new ArrayList<String>();
+        Connection connection = null;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT POSITION FROM ROLE WHERE ALLOWED = 1");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(resultSet.getString("position"));
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException in RoleDAO.getAllowedRolesList");
+        } finally {
+            if (connection != null) {
+                connectionPool.releaseConnection(connection);
+            }
+        }
+        return list;
+    }
+
+    @Override
     public int getIdByRole(String role) {
         Connection connection = null;
         int id = 0;

@@ -43,19 +43,24 @@ public class UserDAO implements IUserDAO {
     @Override
     public boolean addUser(User user) {
         Connection connection = null;
+        boolean result = false;
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.
                     prepareStatement("INSERT INTO USERS (ROLE, QUALIFICATION, NAME, SURNAME, LOGIN, PASSWORD) VALUES (?, ?, ?, ?, ?, ?)");
             preparedStatement.setInt(1, AbstractDAOFactory.getDAOFactory().getRoleDAO().getIdByRole(user.getRole()));
-            preparedStatement.setInt(2, AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(user.getQualification()));
+            int qualification = AbstractDAOFactory.getDAOFactory().getQualificationDAO().getIdByQualification(user.getQualification());
+            if (qualification == 0) {
+                preparedStatement.setNull(2, Types.INTEGER);
+            } else {
+                preparedStatement.setInt(2, qualification);
+            }
             preparedStatement.setString(3, user.getName());
             preparedStatement.setString(4, user.getSurname());
             preparedStatement.setString(5, user.getLogin());
             preparedStatement.setString(6, user.getPassword());
             if (preparedStatement.executeUpdate() > 0) {
-                connectionPool.closeStatement(preparedStatement);
-                return true;
+                result = true;
             }
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
@@ -63,13 +68,13 @@ public class UserDAO implements IUserDAO {
         } finally {
             connectionPool.releaseConnection(connection);
         }
-        return false;
+        return result;
     }
 
     @Override
     public boolean checkUserByLogin(String login) {
         Connection connection = null;
-        Boolean result = true;
+        boolean result = true;
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USERS WHERE LOGIN = ?");

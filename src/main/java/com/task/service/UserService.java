@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public ArrayList<String> getRoles(){
-        return AbstractDAOFactory.getDAOFactory().getRoleDAO().getRolesList();
+        return AbstractDAOFactory.getDAOFactory().getRoleDAO().getAllowedRolesList();
     }
 
     public ArrayList<String> getQualifications(){
