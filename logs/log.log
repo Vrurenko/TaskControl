@@ -95,3 +95,19 @@ java.lang.IllegalStateException: Neither BindingResult nor plain target object f
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:745)
+2017-01-27 15:07:23 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/css/bootstrap.min.css] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:07:23 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:07:24 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:05 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/css/bootstrap.min.css] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:05 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:06 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:42 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/css/bootstrap.min.css] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:42 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:10:42 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:12 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/css/bootstrap.min.css] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:12 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:12 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:40 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/css/bootstrap.min.css] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:40 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:12:40 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/js/bootstrap.min.js] in DispatcherServlet with name 'dispatcher'
+2017-01-27 15:57:49 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'dispatcher'
