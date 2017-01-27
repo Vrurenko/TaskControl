@@ -14,6 +14,29 @@ public class ProjectDAO implements IProjectDAO {
     private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
+    public boolean hasProject(int customerID) {
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT NAME FROM PROJECT WHERE CUSTOMER = ?");
+            preparedStatement.setInt(1, customerID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            result = resultSet.next();
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println("SQLException in ProjectDAO.hasProject");
+        } finally {
+            if (connection != null) {
+                connectionPool.releaseConnection(connection);
+            }
+        }
+        return result;
+    }
+
+    @Override
     public boolean createProject(Project project) {
         Connection connection = null;
         boolean result = false;
@@ -54,6 +77,31 @@ public class ProjectDAO implements IProjectDAO {
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
             System.out.println("SQLException in ProjectDAO.getProjectIdByManager");
+        } finally {
+            if (connection != null) {
+                connectionPool.releaseConnection(connection);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int getProjectIdByCustomer(int id) {
+        Connection connection = null;
+        int result = 0;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT ID FROM PROJECT WHERE CUSTOMER = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                result = resultSet.getInt("id");
+            }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException e) {
+            System.out.println("SQLException in ProjectDAO.getProjectIdByCustomer");
         } finally {
             if (connection != null) {
                 connectionPool.releaseConnection(connection);

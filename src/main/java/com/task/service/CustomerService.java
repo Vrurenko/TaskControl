@@ -2,6 +2,7 @@ package com.task.service;
 
 import com.task.dao.AbstractDAOFactory;
 import com.task.model.Proposal;
+import com.task.model.Sprint;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,26 @@ public class CustomerService {
         return userName;
     }
 
+    public boolean hasProject() {
+        int customerID = AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(getPrincipal());
+        return AbstractDAOFactory.getDAOFactory().getProjectDAO().hasProject(customerID);
+    }
+
+    public ArrayList<Sprint> getSprints(){
+        return AbstractDAOFactory.getDAOFactory().getSprintDAO().getSprintList(getCustomerProjectID());
+    }
+
+    public int getCustomerProjectID(){
+        int customerID = AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(getPrincipal());
+        return AbstractDAOFactory.getDAOFactory().getProjectDAO().getProjectIdByCustomer(customerID);
+    }
+
     public boolean offerProposal(Proposal proposal) {
         proposal.setCustomer(getPrincipal());
         return AbstractDAOFactory.getDAOFactory().getProposalDAO().createProposal(proposal);
     }
 
-    public ArrayList<Proposal> getCustomerProposals(){
+    public ArrayList<Proposal> getCustomerProposals() {
         return AbstractDAOFactory.getDAOFactory().getProposalDAO().getProposalsByCustomer(getPrincipal());
     }
 

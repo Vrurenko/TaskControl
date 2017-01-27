@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-
 @Controller
 public class RegistrationController{
 
@@ -40,7 +38,6 @@ public class RegistrationController{
             model.addAttribute("qualifications", userService.getQualifications());
             return "registration";
         }
-        System.out.println(user);
         model.addAttribute("answer", userService.addUser(user));
         return "redirect:/login";
     }

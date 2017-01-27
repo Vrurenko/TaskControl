@@ -1,14 +1,10 @@
 package com.task.controller;
 
-import com.task.dao.AbstractDAOFactory;
 import com.task.model.Proposal;
-import com.task.model.User;
 import com.task.service.CustomerService;
-import com.task.service.UserService;
+import com.task.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -21,23 +17,27 @@ import javax.validation.Valid;
 public class CustomerController {
 
     @Autowired
+    @Qualifier("customerService")
     CustomerService customerService;
 
-    @Autowired
-    @Qualifier("userService")
-    UserService userService;
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public String getProposals(ModelMap model) {
-        model.addAttribute("proposal", new Proposal());
-        model.addAttribute("list",customerService.getCustomerProposals());
+        boolean hasProject = customerService.hasProject();
+        model.addAttribute("hasProject", hasProject);
+        if (hasProject) {
+            model.addAttribute("sprintList", customerService.getSprints());
+        } else {
+            model.addAttribute("proposal", new Proposal());
+            model.addAttribute("list", customerService.getCustomerProposals());
+        }
         return "customer";
     }
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public String saveProposal(@Valid Proposal proposal,
-                           BindingResult bindingResult,
-                           ModelMap model) {
+                               BindingResult bindingResult,
+                               ModelMap model) {
         customerService.offerProposal(proposal);
         return "redirect:/customer";
     }

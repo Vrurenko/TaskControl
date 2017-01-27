@@ -61,8 +61,9 @@
 <script>
     var hideQualifications = function () {
         $('label[for="qualification"]').hide();
-        $("#qualification").hide();
         $("#qualification").prepend('<option value="NONE" selected>--- Select ---</option>');
+        $("#qualification").hide();
+
     };
     var showQualifications = function () {
         $('label[for="qualification"]').show();
@@ -71,8 +72,6 @@
     }
 
     $(document).ready(function () {
-
-        hideQualifications();
 
         $("#role").change(function () {
             if ($(this).val() === 'ROLE_EMPLOYEE') {
