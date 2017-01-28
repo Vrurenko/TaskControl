@@ -64,7 +64,7 @@
 </table>
 
 
-<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
+<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
 </body>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>

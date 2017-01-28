@@ -10,6 +10,11 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/pics" />
+        </sourceRoots>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -28,6 +33,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/pics" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/webapp/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -62,5 +68,7 @@
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.poi:poi:3.6" level="project" />
+    <orderEntry type="library" name="jquery-1.10.2" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

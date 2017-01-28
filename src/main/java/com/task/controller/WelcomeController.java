@@ -16,6 +16,11 @@ public class WelcomeController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public String Test(ModelMap model) {
+        return "test";
+    }
+
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcomeTest(ModelMap model) {
         return "welcome";
