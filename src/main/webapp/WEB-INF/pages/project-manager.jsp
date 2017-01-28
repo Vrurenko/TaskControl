@@ -5,69 +5,100 @@
 <html>
 <head>
     <title>Manager</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
 
+<div id="header">
+    <jsp:include page="header.jsp"/>
+</div>
 
-<h1>SPRINTS:</h1>
-<table id="sprintTable">
-    <c:if test="${not empty sprintList}">
-        <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>Complete?</th>
-        </thead>
-        <tbody>
-        <c:forEach items="${sprintList}" var="item">
-            <tr id="${item.id}">
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.startDate}</td>
-                <td>${item.endDate}</td>
-                <td>${item.complete}</td>
-                <td>${item.complete ? "" : "<button id='close'>Close</button>"}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </c:if>
-</table>
-<button id="newSprint">+</button>
+<%--<div class="container">--%>
 
-
-<h1>TASKS:</h1>
-<table id="taskTable">
-    <thead>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Estimate</th>
-    <th>SubTaskOf</th>
-    <th>StartDate</th>
-    <th>EndDate</th>
-    <th>Remaining(d)</th>
-    <th>Qualification</th>
-    <th>Complete?</th>
-    </thead>
-    <tbody align="center">
-    </tbody>
-</table>
-<button id="newTask">+</button>
+<div class="col-md-12">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="text-center">SPRINTS</h4>
+            </div>
+            <table id="sprintTable" class="table table-hover">
+                <c:if test="${not empty sprintList}">
+                    <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                    <th>Complete?</th>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${sprintList}" var="item">
+                        <tr id="${item.id}">
+                            <td>${item.id}</td>
+                            <td>${item.name}</td>
+                            <td>${item.startDate}</td>
+                            <td>${item.endDate}</td>
+                            <td>${item.complete}</td>
+                            <td>${item.complete ? "" : "<button id='close'>Close</button>"}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </c:if>
+            </table>
+        </div>
 
 
-<h1>TASK:</h1>
-<table id="Task">
-    <thead>
-    </thead>
-    <tbody align="left">
-    </tbody>
-</table>
+        <button id="newSprint">+</button>
 
 
-<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="text-center">TASKS</h4>
+            </div>
+            <table id="taskTable" class="table table-hover">
+                <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Estimate</th>
+                <th>SubTaskOf</th>
+                <th>StartDate</th>
+                <th>EndDate</th>
+                <th>Remaining(d)</th>
+                <th>Qualification</th>
+                <th>Complete?</th>
+                </thead>
+                <tbody align="center">
+                </tbody>
+            </table>
+        </div>
+        <button id="newTask">+</button>
+
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="text-center">TASK</h4>
+            </div>
+            <table id="Task" class="table table-hover">
+                <thead>
+                </thead>
+                <tbody align="left">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<%--</div>--%>
+
+
 </body>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <script>
     var rebuildSprintList = function () {

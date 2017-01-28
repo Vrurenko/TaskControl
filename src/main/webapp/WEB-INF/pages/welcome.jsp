@@ -12,22 +12,24 @@
     <jsp:include page="header.jsp"/>
 </div>
 
+<div class="container">
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    <a href="/admin"><h2>ADMIN</h2></a>
-</sec:authorize>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <a href="/admin"><h2>ADMIN</h2></a>
+    </sec:authorize>
 
-<sec:authorize access="hasRole('ROLE_CUSTOMER')">
-    <a href="/customer"><h2>CUSTOMER</h2></a>
-</sec:authorize>
+    <sec:authorize access="hasRole('ROLE_CUSTOMER')">
+        <a href="/customer"><h2>CUSTOMER</h2></a>
+    </sec:authorize>
 
-<sec:authorize access="hasRole('ROLE_EMPLOYEE')">
-    <a href="/employee"><h2>EMPLOYEE</h2></a>
-</sec:authorize>
+    <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
+        <a href="/employee"><h2>EMPLOYEE</h2></a>
+    </sec:authorize>
 
-<sec:authorize access="hasRole('ROLE_MANAGER')">
-    <a href="/project-manager"><h2>MANAGER</h2></a>
-</sec:authorize>
+    <sec:authorize access="hasRole('ROLE_MANAGER')">
+        <a href="/project-manager"><h2>MANAGER</h2></a>
+    </sec:authorize>
+</div>
 
 
 </body>

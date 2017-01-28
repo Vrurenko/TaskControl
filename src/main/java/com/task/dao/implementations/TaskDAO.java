@@ -141,12 +141,14 @@ public class TaskDAO implements ITaskDAO {
                     .prepareStatement("SELECT LOGIN FROM USERS WHERE QUALIFICATION >= \n" +
                             "                              (SELECT QUALIFICATION FROM TASK WHERE ID = ?)\n" +
                             "      AND ROLE = 2\n" +
+                            "      AND (SELECT COMPLETE FROM TASK WHERE ID = ?) = 0\n" +
                             "MINUS\n" +
                             "SELECT LOGIN FROM USER_TASK_MAP\n" +
                             "  LEFT JOIN USERS ON USER_TASK_MAP.USER_ID = USERS.ID\n" +
                             "WHERE TASK_ID = ?");
             preparedStatement.setInt(1, taskID);
             preparedStatement.setInt(2, taskID);
+            preparedStatement.setInt(3, taskID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(resultSet.getString("login"));
