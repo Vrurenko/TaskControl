@@ -14,16 +14,20 @@
     <%--<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>--%>
 </head>
 <body>
-
-
 <div class="container">
+
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
 
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="/">TaskControl</a>
         </div>
 
-        <div class="navbar-header navbar-brand col-sm-offset-8">
+        <div class="navbar-header col-sm-offset-4">
+            <sec:authentication var="principal" property="principal"/>
+            <h3><span class="label label-success">${principal.username}</span></h3>
+        </div>
+
+        <div class="navbar-header navbar-brand col-sm-offset-3">
             <a href="<c:url value="/j_spring_security_logout"/>">
                 <spring:message code="header.logout"/>
             </a>
@@ -38,19 +42,9 @@
                 </select>
             </form>
         </div>
-
-
     </nav>
+
 </div>
-
-
-<%--<nav class="navbar navbar-default" role="navigation">--%>
-<%--<div class="navbar-header pull-right">--%>
-<%--<a class="navbar-brand" href="/">TaskControl</a>--%>
-<%--</div>--%>
-<%--<sec:authentication var="principal" property="principal"/>--%>
-<%--<h3>You have been loged in as ${principal.username}</h3>--%>
-<%--</nav>--%>
 
 </body>
 
