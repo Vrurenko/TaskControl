@@ -1,1 +1,8 @@
 2017-01-28 14:49:51 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/home] in DispatcherServlet with name 'dispatcher'
+2017-01-28 16:24:31 WARN  PageNotFound:198 - Request method 'POST' not supported
+2017-01-28 16:25:37 WARN  PageNotFound:198 - Request method 'POST' not supported
+2017-01-28 16:40:34 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/ru] in DispatcherServlet with name 'dispatcher'
+2017-01-28 16:41:05 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/lang=ru] in DispatcherServlet with name 'dispatcher'
+2017-01-28 16:41:29 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/lang=ru] in DispatcherServlet with name 'dispatcher'
+2017-01-28 16:41:33 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/lang=en] in DispatcherServlet with name 'dispatcher'
+2017-01-28 16:41:42 WARN  PageNotFound:1118 - No mapping found for HTTP request with URI [/lang=en] in DispatcherServlet with name 'dispatcher'

@@ -21,7 +21,9 @@
 <a href="?lang=ua">ua</a>
 
 
-<p><spring:message code="test"/></p>
+<p><spring:message code="header.logout"/></p>
+<p>${pageContext.response.locale}</p>
+
 
 <%--<div class="container">--%>
 <%--<nav class="navbar navbar-default navbar-inverse" role="navigation">--%>

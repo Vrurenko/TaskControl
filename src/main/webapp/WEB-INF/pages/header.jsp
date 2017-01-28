@@ -16,7 +16,6 @@
 <body>
 
 
-
 <div class="container">
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
 
@@ -26,16 +25,16 @@
 
         <div class="navbar-header navbar-brand col-sm-offset-8">
             <a href="<c:url value="/j_spring_security_logout"/>">
-                Log out
+                <spring:message code="header.logout"/>
             </a>
         </div>
 
         <div class="navbar-header pull-right">
-            <form method="GET" class="navbar-form navbar-right  ">
-                <select id="language" name="language" onchange="submit()" class="form-control">
-                    <option value="en" selected>English</option>
-                    <option value="ru">Русский</option>
-                    <option value="uk">Українська</option>
+            <form method="GET" class="navbar-form navbar-right">
+                <select id="language" name="lang" onchange="submit()" class="form-control">
+                    <option value="en" ${pageContext.response.locale == 'en' ? 'selected' : ''}>English</option>
+                    <option value="ru" ${pageContext.response.locale == 'ru' ? 'selected' : ''}>Русский</option>
+                    <option value="ua" ${pageContext.response.locale == 'ua' ? 'selected' : ''}>Українська</option>
                 </select>
             </form>
         </div>
@@ -43,7 +42,6 @@
 
     </nav>
 </div>
-
 
 
 <%--<nav class="navbar navbar-default" role="navigation">--%>
