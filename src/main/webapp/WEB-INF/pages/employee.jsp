@@ -4,48 +4,55 @@
 <html>
 <head>
     <title>Employee</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 </head>
 <body>
+<div>
+    <jsp:include page="header.jsp"/>
+</div>
+<div class="container container-fluid table-responsive">
+    <h1>Your tasks:</h1>
+    <table id="tasks" class="table table-hover table-condensed">
+        <c:if test="${not empty taskList}">
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Sprint</th>
+        <th>SubTaskOf</th>
+        <th>Estimate</th>
+        <th>StartDate</th>
+        <th>EndDate</th>
+        <th>Remaining</th>
+        <th>Accepted</th>
+        <th></th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+        <c:forEach items="${taskList}" var="item">
+            <tr id="${item.id}">
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.sprint}</td>
+                <td>${item.subTaskOf}</td>
+                <td>${item.estimate}</td>
+                <td>${item.startDate}</td>
+                <td>${item.endDate}</td>
+                <td></td>
+                <td>${item.confirm}</td>
+                <td>${item.confirm ? '' : '<button class="button btn btn-default">Confirm</button>'}</td>
+                <td>${item.confirm ? '<button class="button btn btn-primary" + >Complete</button>' : ''}</td>
+            </tr>
+        </c:forEach>
+        </c:if>
 
-<h1>Your tasks:</h1>
-<table id="tasks">
-    <c:if test="${not empty taskList}">
-    <thead>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Sprint</th>
-    <th>SubTaskOf</th>
-    <th>Estimate</th>
-    <th>StartDate</th>
-    <th>EndDate</th>
-    <th>Remaining</th>
-    <th>Accepted</th>
-    </thead>
-    <tbody>
-    <c:forEach items="${taskList}" var="item">
-        <tr id="${item.id}">
-            <td>${item.id}</td>
-            <td>${item.name}</td>
-            <td>${item.sprint}</td>
-            <td>${item.subTaskOf}</td>
-            <td>${item.estimate}</td>
-            <td>${item.startDate}</td>
-            <td>${item.endDate}</td>
-            <td></td>
-            <td>${item.confirm}</td>
-            <td>${item.confirm ? '' : '<button class="button">Confirm</button>'}</td>
-            <td>${item.confirm ? '<button class="button" + >Complete</button>' : ''}</td>
-        </tr>
-    </c:forEach>
-    </c:if>
+        </tbody>
+    </table>
 
-    </tbody>
-</table>
+</div>
 
-<br>
-<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
 </body>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <script>
@@ -76,8 +83,8 @@
                                         + '<td>' + response[i].endDate + '</td>\n'
                                         + '<td>' + '' + '</td>\n'
                                         + '<td>' + response[i].confirm + '</td>\n'
-                                        + '<td>' + (response[i].confirm ? '' : '<button class="button">Confirm</button>') + '</td>\n'
-                                        + '<td>' + (response[i].confirm ? '<button class="button">Complete</button>' : '') + '</td>\n'
+                                        + '<td>' + (response[i].confirm ? '' : '<button class="button btn btn-default" >Confirm</button>') + '</td>\n'
+                                        + '<td>' + (response[i].confirm ? '<button class="button btn btn-primary">Complete</button>' : '') + '</td>\n'
                                         + '</tr>';
                                 $("#tasks > tbody").append(tr);
                             }

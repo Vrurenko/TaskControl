@@ -44,6 +44,8 @@
         </bean>
     </mvc:interceptors>
 
-    <mvc:resources mapping="/pics/**" location="/pics/"/>
+    <mvc:resources mapping="/resources/**"
+                   location="/resources/"
+                   cache-period="31556926"/>
 
 </beans>

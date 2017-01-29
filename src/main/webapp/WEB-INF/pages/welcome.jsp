@@ -29,7 +29,34 @@
     <sec:authorize access="hasRole('ROLE_MANAGER')">
         <a href="/project-manager"><h2>MANAGER</h2></a>
     </sec:authorize>
+
+    <div>
+        <div class="row">
+
+            <div class="col-sm-3 col-md-3 col-md-offset-3">
+                <div class="thumbnail">
+                    <img src="" alt="Account">
+                    <div class="caption">
+                        <a href="/welcome"><h3>Account</h3></a>
+                        <p>Your account page</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3 col-md-3">
+                <div class="thumbnail">
+                    <img src="../pics/report.jpg" alt="Report">
+                    <div class="caption">
+                        <a href="/excel/load"><h3>Report</h3></a>
+                        <p>Report page</p></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+
+
 
 
 </body>

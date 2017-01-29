@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false"%>
 <html>
@@ -18,7 +19,7 @@
 </head>
 <body>
 <div>
-    <img src="pics/404.png">
+    <img src="${pageContext.request.contextPath}/resources/pics/404.png"/>
     <h1 align="center">404</h1>
     <div align="center">
         <a href="/welcome">Get back in the saddle!</a>

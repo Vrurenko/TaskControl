@@ -14,7 +14,7 @@
 </head>
 <body>
 <div align="center">
-    <img src="pics/403.jpg">
+    <img src="WEB-INF/resources/pics/403.jpg">
     <div align="center">
         <a href="/welcome">Get back!</a>
     </div>
