@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
     <style>
         .panel-login{
-            margin-top: 15%;
+            margin-top: 11%;
         }
         .error{
             color: red;
@@ -18,6 +18,9 @@
 </head>
 
 <body>
+<div id="header">
+    <jsp:include page="header.jsp"/>
+</div>
 
 <div class="col-md-4 col-md-offset-4">
     <div class="login-panel panel panel-login panel-default">

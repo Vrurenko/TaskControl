@@ -16,17 +16,10 @@
     </style>
 </head>
 <body>
-<%--<h2>Please Login!</h2>--%>
-<%--<form action="j_spring_security_check" method='POST'>--%>
-<%--Username: <input type="text" name="j_username" /><br />--%>
-<%--Password: <input type="password" name="j_password" />--%>
-<%--<div id="error">--%>
-<%--Invalid username and/or password!--%>
-<%--</div>--%>
-<%--<br/>--%>
-<%--<input type="submit" value="Login" />--%>
 
-<%--</form>--%>
+<div id="header">
+    <jsp:include page="header.jsp"/>
+</div>
 
 <div class="col-md-4 col-md-offset-4">
     <div class="login-panel panel panel-default">

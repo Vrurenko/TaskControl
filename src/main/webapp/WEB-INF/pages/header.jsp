@@ -16,19 +16,21 @@
     <nav class="navbar navbar-default navbar-inverse" role="navigation">
 
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="/">TaskControl</a>
+            <a class="navbar-brand" href="/welcome">TaskControl</a>
         </div>
 
-        <div class="navbar-header col-sm-offset-4">
-            <sec:authentication var="principal" property="principal"/>
-            <h3><span class="label label-success">${principal.username}</span></h3>
-        </div>
+        <sec:authorize access="isAuthenticated()">
+            <div class="navbar-header col-sm-offset-4">
+                <sec:authentication var="principal" property="principal"/>
+                <h3><span class="label label-success">${principal.username}</span></h3>
+            </div>
 
-        <div class="navbar-header navbar-brand col-sm-offset-3">
-            <a href="<c:url value="/j_spring_security_logout"/>">
-                <spring:message code="header.logout"/>
-            </a>
-        </div>
+            <div class="navbar-header navbar-brand col-sm-offset-3">
+                <a href="<c:url value="/j_spring_security_logout"/>">
+                    <spring:message code="header.logout"/>
+                </a>
+            </div>
+        </sec:authorize>
 
         <div class="navbar-header pull-right">
             <form method="GET" class="navbar-form navbar-right">
