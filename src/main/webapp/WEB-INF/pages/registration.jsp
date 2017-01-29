@@ -5,74 +5,84 @@
 <html>
 <head>
     <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <style>
+        .panel-login{
+            margin-top: 15%;
+        }
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
 
+<div class="col-md-4 col-md-offset-4">
+    <div class="login-panel panel panel-login panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"> Register New User</h3>
+        </div>
+        <div class="panel-body">
+            <form:form method="POST" modelAttribute="user">
+                <div class="form-group">
+                    <form:input type="text" path="name" id="name" cssClass="form-control" placeholder="Name"/>
+                    <form:errors path="name" cssClass="error"/>
+                </div>
 
-<h1>New User Registration Form</h1>
+                <div class="form-group">
+                    <form:input type="text" path="surname" id="surname" cssClass="form-control" placeholder="Surname"/>
+                    <form:errors path="surname" cssClass="error"/>
+                </div>
 
-<form:form method="POST" modelAttribute="user">
+                <div class="form-group">
+                    <form:input type="text" path="login" id="login" cssClass="form-control" placeholder="Login"/>
+                    <form:errors path="login" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input type="password" path="password" id="password" cssClass="form-control" placeholder="Password"/>
+                    <form:errors path="password" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:select path="role" cssClass="form-control" id="role">
+                        <form:option value="" label="Select Role..."/>
+                        <form:options items="${roles}"/>
+                    </form:select>
+                    <form:errors path="role" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:select path="qualification" items="${qualifications}" id="qualification" placeholder="Qualification"
+                                 cssClass="form-control"/>
+                    <form:errors path="qualification"/>
+                </div>
 
-    <label for="name">Name</label>
-    <form:input type="text" path="name" id="name"/>
-    <form:errors path="name"/>
+                <input type="submit" value="Register" class="btn btn-primary btn-lg btn-block">
 
-    <br>
+            </form:form>
+        </div>
+    </div>
+</div>
 
-    <label for="surname">Surname</label>
-    <form:input type="text" path="surname" id="surname"/>
-    <form:errors path="surname"/>
-
-    <br>
-
-    <label for="login">Login</label>
-    <form:input type="text" path="login" id="login"/>
-    <form:errors path="login"/>
-
-    <br>
-
-    <label for="password">Password</label>
-    <form:input type="password" path="password" id="password"/>
-    <form:errors path="password"/>
-
-    <br>
-
-    <label for="role">Role</label>
-    <form:select path="role" items="${roles}" id="role"/>
-    <form:errors path="role"/>
-
-    <br>
-
-    <label for="qualification">Qualification</label>
-    <form:select path="qualification" items="${qualifications}" id="qualification"/>
-    <form:errors path="qualification"/>
-
-    <br>
-
-    <input type="submit" value="Register">
-
-</form:form>
 
 </body>
-
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 <script>
     var hideQualifications = function () {
-        $('label[for="qualification"]').hide();
         $("#qualification").prepend('<option value="NONE" selected>--- Select ---</option>');
         $("#qualification").hide();
 
     };
     var showQualifications = function () {
-        $('label[for="qualification"]').show();
         $("#qualification").show();
         $("#qualification option[value='NONE']").remove();
     }
 
     $(document).ready(function () {
-
+        hideQualifications();
         $("#role").change(function () {
             if ($(this).val() === 'ROLE_EMPLOYEE') {
                 showQualifications();

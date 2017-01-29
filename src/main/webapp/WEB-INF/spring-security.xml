@@ -13,16 +13,16 @@
     <http use-expressions="true" auto-config="true">
         <!--we intercept request and make sure that login users with specific role can only access the pages-->
         <intercept-url pattern="/welcome" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_EMPLOYEE', 'ROLE_MANAGER')"/>
-        <intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/customer*" access="hasRole('ROLE_CUSTOMER')"/>
-        <intercept-url pattern="/employee*" access="hasRole('ROLE_EMPLOYEE')"/>
-        <intercept-url pattern="/project-manager*" access="hasRole('ROLE_MANAGER')"/>
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/customer" access="hasRole('ROLE_CUSTOMER')"/>
+        <intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')"/>
+        <intercept-url pattern="/project-manager" access="hasRole('ROLE_MANAGER')"/>
 
         <form-login login-page="/login"
                     default-target-url="/welcome"
-                    authentication-failure-url="/login?error="/>
+                    authentication-failure-url="/login?error=true"/>
         <logout invalidate-session="true"
-                logout-success-url="/logout"/>
+                logout-success-url="/login"/>
     </http>
 
     <authentication-manager>
@@ -36,5 +36,4 @@
 
     <!--Controllers-->
     <mvc:view-controller path="/login" view-name="login"/>
-    <mvc:view-controller path="/logout" view-name="logout"/>
 </beans:beans>
