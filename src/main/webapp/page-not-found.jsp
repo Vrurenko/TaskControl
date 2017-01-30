@@ -19,7 +19,7 @@
 </head>
 <body>
 <div>
-    <img src="${pageContext.request.contextPath}/resources/pics/404.png"/>
+    <img src="<c:url value="/resources/pics/404.jpg"/>"/>
     <h1 align="center">404</h1>
     <div align="center">
         <a href="/welcome">Get back in the saddle!</a>
