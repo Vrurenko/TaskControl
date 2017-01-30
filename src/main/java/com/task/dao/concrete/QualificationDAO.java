@@ -1,7 +1,7 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.IQualificationDAO;
+import com.task.dao.contracts.IQualificationDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

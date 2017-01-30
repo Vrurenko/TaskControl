@@ -47,7 +47,7 @@
                 <div class="thumbnail">
                     <img src="<c:url value="/resources/pics/report.jpg"/>" alt="Report">
                     <div class="caption" align="center">
-                        <a href="/excel/load"><h3>Report</h3></a>
+                        <a href="/report"><h3>Report</h3></a>
                         <p>Report page</p></div>
                 </div>
             </div>

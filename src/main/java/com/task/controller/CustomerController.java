@@ -1,8 +1,7 @@
 package com.task.controller;
 
 import com.task.model.Proposal;
-import com.task.service.CustomerService;
-import com.task.service.ManagerService;
+import com.task.service.contracts.ICustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ public class CustomerController {
 
     @Autowired
     @Qualifier("customerService")
-    CustomerService customerService;
+    ICustomerService customerService;
 
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)

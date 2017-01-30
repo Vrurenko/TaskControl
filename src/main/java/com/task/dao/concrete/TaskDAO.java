@@ -1,15 +1,12 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
-import com.sun.org.apache.xerces.internal.parsers.AbstractDOMParser;
 import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.ITaskDAO;
+import com.task.dao.contracts.ITaskDAO;
 import com.task.model.Task;
-import com.task.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class TaskDAO implements ITaskDAO {
     private ConnectionPool connectionPool = new ConnectionPool();

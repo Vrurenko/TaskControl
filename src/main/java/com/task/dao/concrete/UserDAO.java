@@ -1,9 +1,9 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
 import com.task.dao.AbstractDAOFactory;
 import com.task.model.User;
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.IUserDAO;
+import com.task.dao.contracts.IUserDAO;
 import org.apache.log4j.Logger;
 
 import java.sql.*;

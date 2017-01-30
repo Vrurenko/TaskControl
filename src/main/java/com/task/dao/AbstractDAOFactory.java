@@ -1,6 +1,6 @@
 package com.task.dao;
 
-import com.task.dao.interfaces.*;
+import com.task.dao.contracts.*;
 
 public abstract class AbstractDAOFactory {
 
@@ -15,8 +15,6 @@ public abstract class AbstractDAOFactory {
     public abstract ISprintDAO getSprintDAO();
 
     public abstract ITaskDAO getTaskDAO();
-
-    public abstract ITicketDAO getTicketDAO();
 
     public abstract IUserDAO getUserDAO();
 

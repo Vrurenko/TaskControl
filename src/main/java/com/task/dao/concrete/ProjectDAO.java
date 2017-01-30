@@ -1,8 +1,8 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
 import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.IProjectDAO;
+import com.task.dao.contracts.IProjectDAO;
 import com.task.model.Project;
 
 import java.sql.Connection;

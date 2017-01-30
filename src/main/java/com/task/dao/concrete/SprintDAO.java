@@ -1,11 +1,8 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
-import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.ISprintDAO;
-import com.task.model.Project;
+import com.task.dao.contracts.ISprintDAO;
 import com.task.model.Sprint;
-import com.task.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

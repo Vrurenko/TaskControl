@@ -32,7 +32,7 @@
     </authentication-manager>
 
     <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <beans:bean id="customUserDetailsService" class="com.task.service.CustomUserDetailsService"/>
+    <beans:bean id="customUserDetailsService" class="com.task.service.concrete.CustomUserDetailsService"/>
 
     <!--Controllers-->
     <mvc:view-controller path="/login" view-name="login"/>

@@ -1,7 +1,7 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.IRoleDAO;
+import com.task.dao.contracts.IRoleDAO;
 
 import java.sql.*;
 import java.util.ArrayList;

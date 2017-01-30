@@ -3,7 +3,7 @@ package com.task.controller;
 import com.task.model.User;
 import javax.validation.Valid;
 
-import com.task.service.UserService;
+import com.task.service.contracts.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ public class RegistrationController{
 
     @Autowired
     @Qualifier("userService")
-    UserService userService;
+    IUserService userService;
 
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)

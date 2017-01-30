@@ -1,7 +1,7 @@
 package com.task.dao;
 
-import com.task.dao.implementations.*;
-import com.task.dao.interfaces.*;
+import com.task.dao.concrete.*;
+import com.task.dao.contracts.*;
 
 public class OracleDAOFactory extends AbstractDAOFactory {
 
@@ -27,10 +27,6 @@ public class OracleDAOFactory extends AbstractDAOFactory {
 
     public ITaskDAO getTaskDAO() {
         return new TaskDAO();
-    }
-
-    public ITicketDAO getTicketDAO() {
-        return new TicketDAO();
     }
 
     public IUserDAO getUserDAO() {

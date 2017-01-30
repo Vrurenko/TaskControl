@@ -4,8 +4,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
+    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
     <title>Admin</title>
     <style>
         .wid {
@@ -47,11 +47,11 @@
                                 ${item.description}
                         </td>
                         <td>
-                                <form:input path="endDate"
-                                id="endDate"
-                                cssClass="datepicker"
-                                type="date"/>
-                                <form:errors path="endDate"/>
+                            <form:input path="endDate"
+                                        id="endDate"
+                                        cssClass="datepicker"
+                                        type="date"/>
+                            <form:errors path="endDate"/>
                         </td>
                         <td>
                             <form:select path="manager"
@@ -72,8 +72,8 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
+<%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
 <script>
     $(document).ready(function () {
         $('[type="date"]').prop('min', function () {

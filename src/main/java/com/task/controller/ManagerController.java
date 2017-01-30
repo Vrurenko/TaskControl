@@ -3,7 +3,7 @@ package com.task.controller;
 import com.task.dao.AbstractDAOFactory;
 import com.task.model.Sprint;
 import com.task.model.Task;
-import com.task.service.ManagerService;
+import com.task.service.contracts.IManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class ManagerController {
 
     @Autowired
     @Qualifier("managerService")
-    ManagerService managerService;
+    IManagerService managerService;
 
     @RequestMapping(value = "/project-manager", method = RequestMethod.GET)
     public String viewManager(ModelMap modelMap) {

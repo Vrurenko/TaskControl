@@ -5,6 +5,8 @@
 <html>
 <head>
     <title>Customer</title>
+    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
+    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
     <style>
         td.decs {
             word-break: break-all;
@@ -110,8 +112,8 @@
 
 
 </body>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
+<%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
 
 <script>
     $(document).ready(function () {

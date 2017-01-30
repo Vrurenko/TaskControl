@@ -2,8 +2,9 @@ package com.task.controller;
 
 import com.task.dao.AbstractDAOFactory;
 import com.task.model.Project;
-import com.task.service.AdminService;
+import com.task.service.contracts.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,8 @@ import javax.validation.Valid;
 public class AdminController {
 
     @Autowired
-    AdminService adminService;
+    @Qualifier("adminService")
+    IAdminService adminService;
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String viewAdmin(ModelMap model) {

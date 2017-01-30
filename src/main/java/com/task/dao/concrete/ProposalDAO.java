@@ -1,10 +1,9 @@
-package com.task.dao.implementations;
+package com.task.dao.concrete;
 
 import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
-import com.task.dao.interfaces.IProposalDAO;
+import com.task.dao.contracts.IProposalDAO;
 import com.task.model.Proposal;
-import com.task.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;

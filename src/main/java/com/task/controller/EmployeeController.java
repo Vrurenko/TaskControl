@@ -1,7 +1,7 @@
 package com.task.controller;
 
 import com.task.model.Task;
-import com.task.service.EmployeeService;
+import com.task.service.contracts.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String getAll(ModelMap model) {

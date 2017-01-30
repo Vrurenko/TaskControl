@@ -1,8 +1,7 @@
-package com.task.dao.interfaces;
+package com.task.dao.contracts;
 
 import com.task.model.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface ITaskDAO {

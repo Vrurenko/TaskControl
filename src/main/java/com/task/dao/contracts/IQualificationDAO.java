@@ -1,4 +1,4 @@
-package com.task.dao.interfaces;
+package com.task.dao.contracts;
 
 import java.util.ArrayList;
 
