@@ -25,7 +25,7 @@
 <div class="col-md-4 col-md-offset-4">
     <div class="login-panel panel panel-login panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"> Register New User</h3>
+            <h3 class="panel-title">Register New User</h3>
         </div>
         <div class="panel-body">
             <form:form method="POST" modelAttribute="user">

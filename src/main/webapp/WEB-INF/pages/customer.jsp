@@ -5,83 +5,110 @@
 <html>
 <head>
     <title>Customer</title>
+    <style>
+        td.decs {
+            word-break: break-all;
+        }
+    </style>
 </head>
 <body>
 
-<c:if test="${hasProject}">
-    <h1>SPRINTS:</h1>
-    <table id="sprintTable">
-        <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>Complete?</th>
-        </thead>
-        <tbody>
-        <c:forEach items="${sprintList}" var="item">
-            <tr id="${item.id}">
-                <td>${item.id}</td>
-                <td>${item.name}</td>
-                <td>${item.startDate}</td>
-                <td>${item.endDate}</td>
-                <td>${item.complete}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+<div id="header">
+    <jsp:include page="header.jsp"/>
+</div>
 
-    <h1>TASKS:</h1>
-    <table id="taskTable">
-        <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Estimate</th>
-        <th>SubTaskOf</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>Remaining(d)</th>
-        <th>Qualification</th>
-        <th>Complete?</th>
-        </thead>
-        <tbody align="center">
-        </tbody>
-    </table>
-</c:if>
-
-
-<c:if test="${not hasProject}">
-    <h1>New Proposal Registration Form</h1>
-    <form:form method="POST" modelAttribute="proposal">
-        <label for="name">Name</label>
-        <form:input type="text" path="name" id="name"/>
-        <form:errors path="name"/>
-        <br>
-        <label for="description">Description</label>
-        <form:textarea type="text" path="description" id="description"/>
-        <form:errors path="description"/>
-        <input type="submit" value="Register">
-    </form:form>
-
-
-    <c:if test="${not empty list}">
-        <table>
+<div class="container container-fluid table-responsive">
+    <c:if test="${hasProject}">
+        <h1>SPRINTS:</h1>
+        <table id="sprintTable" class="table table-hover table-condensed">
+            <thead>
+            <th>ID</th>
             <th>Name</th>
-            <th>Description</th>
-            <c:forEach items="${list}" var="item">
-                <tr>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Complete?</th>
+            </thead>
+            <tbody>
+            <c:forEach items="${sprintList}" var="item">
+                <tr id="${item.id}">
+                    <td>${item.id}</td>
                     <td>${item.name}</td>
-                    <td>${item.description}</td>
+                    <td>${item.startDate}</td>
+                    <td>${item.endDate}</td>
+                    <td>${item.complete}</td>
                 </tr>
             </c:forEach>
+            </tbody>
+        </table>
+
+        <h1>TASKS:</h1>
+        <table id="taskTable" class="table table-hover table-condensed">
+            <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Estimate</th>
+            <th>SubTaskOf</th>
+            <th>StartDate</th>
+            <th>EndDate</th>
+            <th>Remaining(d)</th>
+            <th>Qualification</th>
+            <th>Complete?</th>
+            </thead>
+            <tbody align="center">
+            </tbody>
         </table>
     </c:if>
 
-</c:if>
+
+    <c:if test="${not hasProject}">
+        <div class="col-md-4 col-md-offset-1">
+            <div class="login-panel panel panel-login panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">New Proposal Registration Form</h3>
+                </div>
+                <div class="panel-body">
+                    <form:form method="POST" modelAttribute="proposal">
+
+                        <div class="form-group">
+                            <form:input type="text" path="name" id="name" cssClass="form-control"
+                                        placeholder="Project Name"/>
+                            <form:errors path="name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <form:textarea type="text" path="description" id="description" cssClass="form-control"
+                                           placeholder="Description"/>
+                            <form:errors path="description"/>
+                        </div>
+
+                        <input type="submit" value="Register" class="btn btn-primary btn-lg btn-block">
+                    </form:form>
+                </div>
+            </div>
+        </div>
 
 
-<br>
-<a href="<c:url value="/j_spring_security_logout" />">Logout</a>
+        <c:if test="${not empty list}">
+            <div class="col-md-4 col-md-offset-2">
+                <h1 align="center">Proposals:</h1>
+                <table class="table table-hover table-condensed">
+                    <th>Name</th>
+                    <th>Description</th>
+                    <c:forEach items="${list}" var="item">
+                        <tr>
+                            <td>${item.name}</td>
+                            <td class="decs">${item.description}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </c:if>
+
+
+    </c:if>
+</div>
+
+
 </body>
 
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
