@@ -22,7 +22,6 @@
 
     <div>
         <div class="row">
-
             <div class="col-sm-3 col-md-3 col-md-offset-3">
                 <div class="thumbnail">
                     <img src="<c:url value="/resources/pics/account.jpg"/>" alt="Account">
@@ -52,7 +51,6 @@
                         <p>Report page</p></div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
