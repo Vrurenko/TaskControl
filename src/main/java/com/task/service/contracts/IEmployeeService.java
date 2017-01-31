@@ -4,7 +4,7 @@ import com.task.model.Task;
 
 import java.util.ArrayList;
 /**
- * Provides service to perform employee duties.
+ * Provides the interface for service to perform employee duties.
  */
 public interface IEmployeeService {
     /**

@@ -2,6 +2,9 @@ package com.task.dao;
 
 import com.task.dao.contracts.*;
 
+/**
+ * Implementation of the Abstract Factory pattern.
+ */
 public abstract class AbstractDAOFactory {
 
     public abstract IProjectDAO getProjectDAO();

@@ -13,37 +13,23 @@ import java.util.ArrayList;
 @Service("employeeService")
 @Transactional
 /**
- *
+ * Provides the implementation for service to perform employee duties.
  */
 public class EmployeeService implements IEmployeeService {
 
     @Autowired
     IPrincipalService principalService;
 
-    /**
-     *
-     * @return
-     */
     @Override
     public ArrayList<Task> getEmployeeTasks(){
         return AbstractDAOFactory.getDAOFactory().getTaskDAO().getEmployeeTasks(principalService.getCurrentPrincipalID());
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     @Override
     public boolean confirmTask(int id){
         return AbstractDAOFactory.getDAOFactory().getTaskDAO().confirmTaskByID(id);
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     @Override
     public boolean completeTask(int id){
         return AbstractDAOFactory.getDAOFactory().getTaskDAO().completeTaskByID(id);

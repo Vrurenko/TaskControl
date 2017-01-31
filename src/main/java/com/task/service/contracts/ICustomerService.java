@@ -5,7 +5,7 @@ import com.task.model.Sprint;
 
 import java.util.ArrayList;
 /**
- * Provides service to perform customer duties.
+ * Provides the interface for service to perform customer duties.
  */
 public interface ICustomerService {
     /**

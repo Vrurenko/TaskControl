@@ -12,6 +12,9 @@ public class ConnectionPool {
 
     private DataSource dataSource;
 
+    /**
+     * Retrieves a dataSource from InitialContext.
+     */
     public ConnectionPool(){
         Locale.setDefault(new Locale("EN"));
         try {
@@ -22,6 +25,10 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Retrieves a connection from connection pool.
+     * @return the connection.
+     */
     public Connection getConnection(){
         Connection connection = null;
         try {
@@ -33,6 +40,10 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * Releases the connection into connection pool.
+     * @param connection teh connection.
+     */
     public void releaseConnection(Connection connection){
         try {
             if (connection != null) {
@@ -43,6 +54,10 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Closes the prepared statement.
+     * @param preparedStatement the prepared statement.
+     */
     public void closeStatement(PreparedStatement preparedStatement){
         try {
             if (preparedStatement != null){
@@ -53,6 +68,10 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Closes the result set.
+     * @param resultSet the result set.
+     */
     public void closeResultSet(ResultSet resultSet){
         try {
             if (resultSet != null){

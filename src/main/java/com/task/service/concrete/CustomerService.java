@@ -14,13 +14,10 @@ import java.util.ArrayList;
 @Service("customerService")
 @Transactional
 /**
- *
+ * Provides the implementation for service to perform customer duties.
  */
 public class CustomerService implements ICustomerService {
-    /**
-     *
-     * @return
-     */
+
     private String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -33,50 +30,29 @@ public class CustomerService implements ICustomerService {
         return userName;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public boolean hasProject() {
         int customerID = AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(getPrincipal());
         return AbstractDAOFactory.getDAOFactory().getProjectDAO().hasProject(customerID);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public ArrayList<Sprint> getSprints(){
         return AbstractDAOFactory.getDAOFactory().getSprintDAO().getSprintList(getCustomerProjectID());
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int getCustomerProjectID(){
         int customerID = AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(getPrincipal());
         return AbstractDAOFactory.getDAOFactory().getProjectDAO().getProjectIdByCustomer(customerID);
     }
 
-    /**
-     *
-     * @param proposal
-     * @return
-     */
     @Override
     public boolean offerProposal(Proposal proposal) {
         proposal.setCustomer(getPrincipal());
         return AbstractDAOFactory.getDAOFactory().getProposalDAO().createProposal(proposal);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public ArrayList<Proposal> getCustomerProposals() {
         return AbstractDAOFactory.getDAOFactory().getProposalDAO().getProposalsByCustomer(getPrincipal());

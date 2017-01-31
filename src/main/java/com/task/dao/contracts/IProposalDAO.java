@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public interface IProposalDAO {
 
-    public boolean createProposal(Proposal proposal);
+    boolean createProposal(Proposal proposal);
 
-    public ArrayList<Proposal> getProposalsByCustomer(String customer);
+    ArrayList<Proposal> getProposalsByCustomer(String customer);
 
-    public ArrayList<Proposal> getProposalList();
+    ArrayList<Proposal> getProposalList();
 
-    public boolean approveProposal(int id);
+    boolean approveProposal(int id);
 
-    public int getCustomerIdByProposalId(int id);
+    int getCustomerIdByProposalId(int id);
 
 }

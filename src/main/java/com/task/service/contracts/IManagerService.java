@@ -5,7 +5,7 @@ import com.task.model.Task;
 
 import java.util.ArrayList;
 /**
- * Provides service to perform manager duties.
+ * Provides the interface for service to perform manager duties.
  */
 public interface IManagerService {
     /**

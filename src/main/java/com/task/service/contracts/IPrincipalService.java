@@ -1,7 +1,7 @@
 package com.task.service.contracts;
 
 /**
- * Provides service to perform principal duties.
+ * Provides the interface for service to perform principal duties.
  */
 public interface IPrincipalService {
     /**

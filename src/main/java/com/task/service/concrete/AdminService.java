@@ -12,33 +12,20 @@ import java.util.ArrayList;
 @Service("adminService")
 @Transactional
 /**
- *
+ * Provides the implementation for service to perform administrator duties.
  */
 public class AdminService implements IAdminService {
 
-    /**
-     *
-     * @return
-     */
     @Override
     public ArrayList<Proposal> getProposalList(){
         return AbstractDAOFactory.getDAOFactory().getProposalDAO().getProposalList();
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public ArrayList<String> getEmployeeList(){
         return AbstractDAOFactory.getDAOFactory().getUserDAO().getEmployeeLogins();
     }
 
-    /**
-     *
-     * @param project
-     * @return
-     */
     @Override
     public boolean acceptProposal(Project project){
         boolean result = AbstractDAOFactory.getDAOFactory().getProjectDAO().createProject(project);

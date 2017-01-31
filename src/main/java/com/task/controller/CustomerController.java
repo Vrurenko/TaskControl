@@ -35,9 +35,12 @@ public class CustomerController {
 
     @RequestMapping(value = "/customer", method = RequestMethod.POST)
     public String saveProposal(@Valid Proposal proposal,
-                               BindingResult bindingResult,
-                               ModelMap model) {
-        customerService.offerProposal(proposal);
+                               BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "customer";
+        } else {
+            customerService.offerProposal(proposal);
+        }
         return "redirect:/customer";
     }
 }

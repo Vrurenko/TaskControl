@@ -6,7 +6,7 @@ import com.task.model.Proposal;
 import java.util.ArrayList;
 
 /**
- * Provides service to perform administrator duties.
+ * Provides the interface for service to perform administrator duties.
  */
 public interface IAdminService {
     /**

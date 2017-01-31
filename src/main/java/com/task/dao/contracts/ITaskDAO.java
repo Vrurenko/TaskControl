@@ -6,30 +6,30 @@ import java.util.ArrayList;
 
 public interface ITaskDAO {
 
-    public ArrayList<Task> getLastSprintTasks(int projectID);
+    ArrayList<Task> getLastSprintTasks(int projectID);
 
-    public ArrayList<Task> getTasksBySprintID(int projectID);
+    ArrayList<Task> getTasksBySprintID(int projectID);
 
-    public Task getTaskByID(int id);
+    Task getTaskByID(int id);
 
-    public String getTaskNameById(int id);
+    String getTaskNameById(int id);
 
-    public ArrayList<String> getFreeFromTaskEmployees(int taskID);
+    ArrayList<String> getFreeFromTaskEmployees(int taskID);
 
-    public ArrayList<String> getTaskEmployees(int taskID);
+    ArrayList<String> getTaskEmployees(int taskID);
 
-    public boolean setEmployeeToTask(int taskID, String login);
+    boolean setEmployeeToTask(int taskID, String login);
 
-    public ArrayList<Task> getEmployeeTasks(int userID);
+    ArrayList<Task> getEmployeeTasks(int userID);
 
-    public boolean confirmTaskByID(int taskID);
+    boolean confirmTaskByID(int taskID);
 
-    public boolean completeTaskByID(int taskID);
+    boolean completeTaskByID(int taskID);
 
-    public boolean addTask(Task task, int sprintID);
+    boolean addTask(Task task, int sprintID);
 
-    public int getTaskIdByName(String name);
+    int getTaskIdByName(String name);
 
-    public ArrayList<String> getLastSprintTaskNames(int sprintID);
+    ArrayList<String> getLastSprintTaskNames(int sprintID);
 
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Provides service to perform user duties.
+ * Provides the interface for service to perform user duties.
  */
 public interface IUserService {
     /**

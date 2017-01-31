@@ -8,14 +8,10 @@ import org.springframework.stereotype.Service;
 
 @Service("principalService")
 /**
- *
+ * Provides the implementation for service to perform principal duties.
  */
 public class PrincipalService implements IPrincipalService {
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String getCurrentPrincipal() {
         String userName = null;
@@ -29,10 +25,6 @@ public class PrincipalService implements IPrincipalService {
         return userName;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int getCurrentPrincipalID(){
         return AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(getCurrentPrincipal());

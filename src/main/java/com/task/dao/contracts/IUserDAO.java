@@ -6,26 +6,26 @@ import java.util.ArrayList;
 
 public interface IUserDAO {
 
-    public ArrayList<User> getUsersByRole(String role);
+    ArrayList<User> getUsersByRole(String role);
 
-    public ArrayList<String> getEmployeeLogins();
+    ArrayList<String> getEmployeeLogins();
 
-    public ArrayList<String> getEmployeeByQualification(int qualification);
+    ArrayList<String> getEmployeeByQualification(int qualification);
 
-    public User getUserByLogin(String login);
+    User getUserByLogin(String login);
 
-    public String getUsernameById(int id);
+    String getUsernameById(int id);
 
-    public String getLoginById(int id);
+    String getLoginById(int id);
 
-    public int getUserIdByLogin(String login);
+    int getUserIdByLogin(String login);
 
-    public boolean setManager(String login);
+    boolean setManager(String login);
 
-    public boolean demoteManager(String login);
+    boolean demoteManager(String login);
 
-    public boolean addUser(User user);
+    boolean addUser(User user);
 
-    public boolean checkUserByLogin(String login);
+    boolean checkUserByLogin(String login);
 
 }
