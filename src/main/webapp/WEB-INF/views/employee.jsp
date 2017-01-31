@@ -34,7 +34,7 @@
                 <td>${item.id}</td>
                 <td>${item.name}</td>
                 <td>${item.sprint}</td>
-                <td>${item.subTaskOf}</td>
+                <td>${item.primaryTask}</td>
                 <td>${item.estimate}</td>
                 <td>${item.startDate}</td>
                 <td>${item.endDate}</td>
@@ -77,7 +77,7 @@
                                         + '<td>' + response[i].id + '</td>\n'
                                         + '<td>' + response[i].name + '</td>\n'
                                         + '<td>' + response[i].sprint + '</td>\n'
-                                        + '<td>' + (response[i].subTaskOf || '') + '</td>\n'
+                                        + '<td>' + (response[i].primaryTask || '') + '</td>\n'
                                         + '<td>' + response[i].estimate + '</td>\n'
                                         + '<td>' + response[i].startDate + '</td>\n'
                                         + '<td>' + response[i].endDate + '</td>\n'

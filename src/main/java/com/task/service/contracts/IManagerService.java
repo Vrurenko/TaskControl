@@ -4,26 +4,15 @@ import com.task.model.Sprint;
 import com.task.model.Task;
 
 import java.util.ArrayList;
-
+/**
+ * Provides service to perform manager duties.
+ */
 public interface IManagerService {
     /**
-     *
-     * @return
+     * Returns the list of manager`s project sprints.
+     * @return the list of sprints.
      */
     ArrayList<Sprint> getSprints();
-
-    /**
-     *
-     * @return
-     */
-    ArrayList<Task> getCurrentTasks();
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    ArrayList<Task> getTasksBySprintID(int id);
 
     /**
      *

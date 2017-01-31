@@ -2,9 +2,14 @@ package com.task.model;
 
 import java.sql.Date;
 
+/**
+ * Represents a task entity, providing access to the task's
+ * id, primaryTask, name, estimate, startDate, endDate,
+ * complete, qualification, sprint, confirm.
+ */
 public class Task {
     private int id;
-    private String subTaskOf;
+    private String primaryTask;
     private String name;
     private int estimate;
     private Date startDate;
@@ -17,9 +22,9 @@ public class Task {
     public Task() {
     }
 
-    public Task(int id, String subTaskOf, String name, int estimate, Date startDate, Date endDate, boolean complete, String qualification, String sprint, boolean confirm) {
+    public Task(int id, String primaryTask, String name, int estimate, Date startDate, Date endDate, boolean complete, String qualification, String sprint, boolean confirm) {
         this.id = id;
-        this.subTaskOf = subTaskOf;
+        this.primaryTask = primaryTask;
         this.name = name;
         this.estimate = estimate;
         this.startDate = startDate;
@@ -38,12 +43,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getSubTaskOf() {
-        return subTaskOf;
+    public String getPrimaryTask() {
+        return primaryTask;
     }
 
-    public void setSubTaskOf(String subTaskOf) {
-        this.subTaskOf = subTaskOf;
+    public void setPrimaryTask(String primaryTask) {
+        this.primaryTask = primaryTask;
     }
 
     public String getName() {
@@ -114,7 +119,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", subTaskOf='" + subTaskOf + '\'' +
+                ", primaryTask='" + primaryTask + '\'' +
                 ", name='" + name + '\'' +
                 ", estimate=" + estimate +
                 ", startDate=" + startDate +

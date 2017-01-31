@@ -236,7 +236,7 @@
                 url: "/project-manager/task/add",
                 data: "name=" + name
                 + "&estimate=" + estimate
-                + "&subTaskOf=" + (subTask == 'Empty' ? null : subTask)
+                + "&primaryTask=" + (subTask == 'Empty' ? null : subTask)
                 + "&qualification=" + qualification,
                 success: function (response) {
                     $("#taskName").remove();
@@ -274,7 +274,7 @@
                                     + '<td>' + response[i].id + '</td>'
                                     + '<td>' + response[i].name + '</td>'
                                     + '<td>' + response[i].estimate + '</td>'
-                                    + '<td>' + response[i].subTaskOf + '</td>'
+                                    + '<td>' + response[i].primaryTask + '</td>'
                                     + '<td>' + response[i].startDate + '</td>'
                                     + '<td>' + response[i].endDate + '</td>'
                                     + '<td>' + Math.round((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24)) + '</td>'
@@ -305,7 +305,7 @@
                     var tr = '<tr>' + '<th>ID</th>' + '<td id="' + response.id + '">' + response.id + '</td>' + '</tr>'
                             + '<tr>' + '<th>Name</th>' + '<td>' + response.name + '</td>' + '</tr>'
                             + '<tr>' + '<th>Estimate</th>' + '<td>' + response.estimate + '</td>' + '</tr>'
-                            + '<tr>' + '<th>SubTaskOf</th>' + '<td>' + response.subTaskOf + '</td>' + '</tr>'
+                            + '<tr>' + '<th>SubTaskOf</th>' + '<td>' + response.primaryTask + '</td>' + '</tr>'
                             + '<tr>' + '<th>StartDate</th>' + '<td>' + response.startDate + '</td>' + '</tr>'
                             + '<tr>' + '<th>EndDate</th>' + '<td>' + response.endDate + '</td>' + '</tr>'
 //                            + '<tr>' + '<th>Remaining</th>' + '<td>' + Math.abs(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / 864e5 + '</td>' + '</tr>'

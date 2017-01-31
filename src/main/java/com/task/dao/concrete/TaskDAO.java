@@ -26,7 +26,7 @@ public class TaskDAO implements ITaskDAO {
                 task.setId(resultSet.getInt("id"));
                 task.setName(resultSet.getString("name"));
                 task.setEstimate(resultSet.getInt("estimate"));
-                task.setSubTaskOf(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
+                task.setPrimaryTask(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
                 task.setStartDate(resultSet.getDate("start_date"));
                 task.setEndDate(resultSet.getDate("end_date"));
                 task.setComplete(resultSet.getBoolean("complete"));
@@ -60,7 +60,7 @@ public class TaskDAO implements ITaskDAO {
                 task.setStartDate(resultSet.getDate("start_date"));
                 task.setEndDate(resultSet.getDate("end_date"));
                 task.setComplete(resultSet.getBoolean("complete"));
-                task.setSubTaskOf(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
+                task.setPrimaryTask(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
                 task.setQualification(AbstractDAOFactory.getDAOFactory().getQualificationDAO().getQualificationById(resultSet.getInt("qualification")));
                 list.add(task);
             }
@@ -86,7 +86,7 @@ public class TaskDAO implements ITaskDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 task.setId(resultSet.getInt("id"));
-                task.setSubTaskOf(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
+                task.setPrimaryTask(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
                 task.setSprint(AbstractDAOFactory.getDAOFactory().getSprintDAO().getSprintNameByID(resultSet.getInt("sprint")));
                 task.setQualification(AbstractDAOFactory.getDAOFactory().getQualificationDAO().getQualificationById(resultSet.getInt("qualification")));
                 task.setEstimate(resultSet.getInt("estimate"));
@@ -221,7 +221,7 @@ public class TaskDAO implements ITaskDAO {
                 task.setEstimate(resultSet.getInt("estimate"));
                 task.setName(resultSet.getString("name"));
                 task.setSprint(AbstractDAOFactory.getDAOFactory().getSprintDAO().getSprintNameByID(resultSet.getInt("sprint")));
-                task.setSubTaskOf(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
+                task.setPrimaryTask(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
                 task.setStartDate(resultSet.getDate("start_date"));
                 task.setEndDate(resultSet.getDate("end_date"));
                 task.setConfirm(resultSet.getBoolean("accepted"));
@@ -290,7 +290,7 @@ public class TaskDAO implements ITaskDAO {
                             + "VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, task.getName());
             preparedStatement.setInt(2, task.getEstimate());
-            subTask = AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getSubTaskOf());
+            subTask = AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskIdByName(task.getPrimaryTask());
             if (subTask == 0){
                 preparedStatement.setNull(3, Types.INTEGER);
             } else {

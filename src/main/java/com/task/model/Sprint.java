@@ -2,6 +2,10 @@ package com.task.model;
 
 import java.util.Date;
 
+/**
+ * Represents a sprint entity, providing access to the sprint's
+ * id, project, name, complete, startDate, endDate.
+ */
 public class Sprint {
     private int id;
     private String project;

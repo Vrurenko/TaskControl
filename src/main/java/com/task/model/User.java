@@ -1,7 +1,11 @@
 package com.task.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
-
+/**
+ * Represents a user entity, providing access to the user's
+ * id, role, qualification, name, surname, login,
+ * password.
+ */
 public class User {
     private int id;
     @NotEmpty

@@ -5,23 +5,26 @@ import com.task.model.Proposal;
 
 import java.util.ArrayList;
 
+/**
+ * Provides service to perform administrator duties.
+ */
 public interface IAdminService {
     /**
-     *
-     * @return
+     * Returns all proposals of all customers
+     * @return all customers proposals list
      */
     ArrayList<Proposal> getProposalList();
 
     /**
-     *
-     * @return
+     * Returns a list of all employees
+     * @return all employees list
      */
     ArrayList<String> getEmployeeList();
 
     /**
-     *
-     * @param project
-     * @return
+     * Creates new project based
+     * @param project the project
+     * @return true if project was created successfully, otherwise false.
      */
     boolean acceptProposal(Project project);
 }

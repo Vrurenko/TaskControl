@@ -2,6 +2,10 @@ package com.task.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * Represents a proposal entity, providing access to the proposal's
+ * id, description, customer, name, approved.
+ */
 public class Proposal {
     private int id;
     private String description;

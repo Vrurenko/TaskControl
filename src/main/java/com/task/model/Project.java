@@ -7,6 +7,11 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * Represents a project entity, providing access to the project's
+ * id, manager, customer, name, startDate, endDate,
+ * proposalId.
+ */
 public class Project {
     private int id;
     @NotNull

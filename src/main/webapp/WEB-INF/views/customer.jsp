@@ -136,7 +136,7 @@
                                     + '<td>' + response[i].id + '</td>'
                                     + '<td>' + response[i].name + '</td>'
                                     + '<td>' + response[i].estimate + '</td>'
-                                    + '<td>' + response[i].subTaskOf + '</td>'
+                                    + '<td>' + response[i].primaryTask + '</td>'
                                     + '<td>' + response[i].startDate + '</td>'
                                     + '<td>' + response[i].endDate + '</td>'
                                     + '<td>' + Math.round((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24)) + '</td>'
