@@ -13,33 +13,6 @@ public class UserDAO implements IUserDAO {
     private static final Logger logger = Logger.getLogger(UserDAO.class);
     ConnectionPool connectionPool = new ConnectionPool();
 
-
-    public ArrayList<User> getUsersByRole(String role) {
-        ArrayList<User> list = new ArrayList<User>();
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USERS WHERE ROLE = ?");
-            preparedStatement.setInt(1, AbstractDAOFactory.getDAOFactory().getRoleDAO().getIdByRole(role));
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                User user = new User();
-                user.setName(resultSet.getString("name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                list.add(user);
-            }
-            connectionPool.closeResultSet(resultSet);
-            connectionPool.closeStatement(preparedStatement);
-        } catch (SQLException ex) {
-            System.out.println("SQLException in UserDAO.getUsersByRole");
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return list;
-    }
-
     @Override
     public boolean addUser(User user) {
         Connection connection = null;
@@ -65,26 +38,6 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
             System.out.println("SQLException in UserDAO.addUser");
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return result;
-    }
-
-    @Override
-    public boolean checkUserByLogin(String login) {
-        Connection connection = null;
-        boolean result = true;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM USERS WHERE LOGIN = ?");
-            preparedStatement.setString(1, login);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            result = resultSet.next();
-            connectionPool.closeResultSet(resultSet);
-            connectionPool.closeStatement(preparedStatement);
-        } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.checkUserByLogin");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -180,28 +133,6 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
             System.out.println("SQLException in UserDAO.getEmployeeLogins");
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return list;
-    }
-
-    @Override
-    public ArrayList<String> getEmployeeByQualification(int qualification) {
-        ArrayList<String> list = new ArrayList<String>();
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT LOGIN FROM USERS WHERE QUALIFICATION >= ?");
-            preparedStatement.setInt(1, qualification);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                list.add(resultSet.getString("login"));
-            }
-            connectionPool.closeResultSet(resultSet);
-            connectionPool.closeStatement(preparedStatement);
-        } catch (SQLException ex) {
-            System.out.println("SQLException in UserDAO.getEmployeeByQualification");
         } finally {
             connectionPool.releaseConnection(connection);
         }

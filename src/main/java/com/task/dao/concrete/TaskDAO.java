@@ -12,37 +12,6 @@ public class TaskDAO implements ITaskDAO {
     private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
-    public ArrayList<Task> getLastSprintTasks(int projectID) {
-        ArrayList<Task> list = new ArrayList<Task>();
-        Connection connection = null;
-        try {
-            connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM TASK WHERE SPRINT = (SELECT MAX(ID) FROM SPRINT WHERE COMPLETE = 0 AND PROJECT = ?)");
-            preparedStatement.setInt(1, projectID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Task task = new Task();
-                task.setId(resultSet.getInt("id"));
-                task.setName(resultSet.getString("name"));
-                task.setEstimate(resultSet.getInt("estimate"));
-                task.setPrimaryTask(AbstractDAOFactory.getDAOFactory().getTaskDAO().getTaskNameById(resultSet.getInt("subtask_of")));
-                task.setStartDate(resultSet.getDate("start_date"));
-                task.setEndDate(resultSet.getDate("end_date"));
-                task.setComplete(resultSet.getBoolean("complete"));
-                list.add(task);
-            }
-            connectionPool.closeResultSet(resultSet);
-            connectionPool.closeStatement(preparedStatement);
-        } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getLastSprintTasks");
-        } finally {
-            connectionPool.releaseConnection(connection);
-        }
-        return list;
-    }
-
-    @Override
     public ArrayList<Task> getTasksBySprintID(int id) {
         ArrayList<Task> list = new ArrayList<Task>();
         Connection connection = null;
