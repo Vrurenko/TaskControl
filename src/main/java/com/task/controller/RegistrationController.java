@@ -4,6 +4,7 @@ import com.task.model.User;
 import javax.validation.Valid;
 
 import com.task.service.contracts.IUserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RegistrationController{
+    private static Logger logger = Logger.getLogger(RegistrationController.class);
 
     @Autowired
     @Qualifier("userService")
@@ -25,6 +27,7 @@ public class RegistrationController{
         model.addAttribute("user", new User());
         model.addAttribute("roles", userService.getRoles());
         model.addAttribute("qualifications", userService.getQualifications());
+        logger.info("Forwarded to registration");
         return "registration";
     }
 
@@ -36,9 +39,11 @@ public class RegistrationController{
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", userService.getRoles());
             model.addAttribute("qualifications", userService.getQualifications());
+            logger.info("Forwarded to registration");
             return "registration";
         }
         model.addAttribute("answer", userService.addUser(user));
+        logger.info("Redirected to registration");
         return "redirect:/login";
     }
 

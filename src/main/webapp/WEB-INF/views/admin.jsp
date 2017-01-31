@@ -4,13 +4,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
     <title>Admin</title>
     <style>
-        .wid {
+        #id.form-control {
             width: 50px;
             text-align: center;
+        }
+        td.desc{
+            width: 400px;
         }
     </style>
 </head>
@@ -35,7 +36,7 @@
                             <form:input path="proposalId"
                                         id="id"
                                         value="${item.id}"
-                                        cssClass="wid"
+                                        cssClass="form-control"
                                         disabled="true"/>
                             <form:errors path="proposalId"/>
                         </td>
@@ -43,13 +44,13 @@
                             <form:input type="text" path="name" id="name" value="${item.name}" cssClass="form-control"/>
                             <form:errors path="name"/>
                         </td>
-                        <td>
+                        <td class="desc">
                                 ${item.description}
                         </td>
                         <td>
                             <form:input path="endDate"
                                         id="endDate"
-                                        cssClass="datepicker"
+                                        cssClass="form-control"
                                         type="date"/>
                             <form:errors path="endDate"/>
                         </td>
@@ -72,8 +73,8 @@
 
 
 </body>
-<%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
-<%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
+<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script>
     $(document).ready(function () {
         $('[type="date"]').prop('min', function () {
@@ -83,11 +84,6 @@
                 return date;
             }
             return new Date().addDays(1).toJSON().split('T')[0];
-        });
-        $(function () {
-            $('#datetimepicker2').datetimepicker({
-                locale: 'ru'
-            });
         });
     });
 </script>

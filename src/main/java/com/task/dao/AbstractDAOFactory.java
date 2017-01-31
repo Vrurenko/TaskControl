@@ -21,6 +21,8 @@ public abstract class AbstractDAOFactory {
 
     public abstract IUserDAO getUserDAO();
 
+    public abstract IReportDAO getReportDAO();
+
     public static AbstractDAOFactory getDAOFactory() {
         return new OracleDAOFactory();
     }

@@ -4,8 +4,6 @@
 <html>
 <head>
     <title>Employee</title>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
 </head>
 <body>
 <div>
@@ -52,9 +50,8 @@
 </div>
 
 </body>
-<%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
-<%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
-
+<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script>
     $(document).ready(function () {
         $("table#tasks").delegate('.button', 'click', function (event) {

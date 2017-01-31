@@ -7,8 +7,8 @@
 <head>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">
-    <script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+    <%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
+    <%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
 </head>
 <body>
 <div class="container">

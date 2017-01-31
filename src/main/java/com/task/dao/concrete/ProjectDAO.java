@@ -1,9 +1,11 @@
 package com.task.dao.concrete;
 
+import com.task.controller.AdminController;
 import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.IProjectDAO;
 import com.task.model.Project;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProjectDAO implements IProjectDAO {
+    private static Logger logger = Logger.getLogger(ProjectDAO.class);
     private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
@@ -27,7 +30,7 @@ public class ProjectDAO implements IProjectDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProjectDAO.hasProject");
+            logger.warn("SQLException in ProjectDAO.hasProject");
         } finally {
             if (connection != null) {
                 connectionPool.releaseConnection(connection);
@@ -51,7 +54,7 @@ public class ProjectDAO implements IProjectDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProjectDAO.createProject");
+            logger.warn("SQLException in ProjectDAO.createProject");
         } finally {
             if (connection != null) {
                 connectionPool.releaseConnection(connection);
@@ -76,7 +79,7 @@ public class ProjectDAO implements IProjectDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProjectDAO.getProjectIdByManager");
+            logger.warn("SQLException in ProjectDAO.getProjectIdByManager");
         } finally {
             if (connection != null) {
                 connectionPool.releaseConnection(connection);
@@ -101,7 +104,30 @@ public class ProjectDAO implements IProjectDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProjectDAO.getProjectIdByCustomer");
+            logger.warn("SQLException in ProjectDAO.getProjectIdByCustomer");
+        } finally {
+            if (connection != null) {
+                connectionPool.releaseConnection(connection);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean closeProject(int projectID) {
+        Connection connection = null;
+        boolean result = false;
+        try {
+            connection = connectionPool.getConnection();
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("UPDATE PROJECT SET RELEASED = 1 WHERE ID = ?\n" +
+                            " AND 0 NOT IN (SELECT COMPLETE FROM SPRINT WHERE PROJECT = ?)");
+            preparedStatement.setInt(1, projectID);
+            preparedStatement.setInt(2, projectID);
+            result = preparedStatement.executeUpdate() > 0;
+            connectionPool.closeStatement(preparedStatement);
+        } catch (SQLException e) {
+            logger.warn("SQLException in ProjectDAO.closeProject");
         } finally {
             if (connection != null) {
                 connectionPool.releaseConnection(connection);

@@ -32,12 +32,10 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(4, user.getSurname());
             preparedStatement.setString(5, user.getLogin());
             preparedStatement.setString(6, user.getPassword());
-            if (preparedStatement.executeUpdate() > 0) {
-                result = true;
-            }
+            result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in UserDAO.addUser");
+            logger.warn("SQLException in UserDAO.addUser");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -65,7 +63,7 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.getUserByLogin");
+            logger.warn("SQLException in UserDAO.getUserByLogin");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -88,7 +86,7 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.getUserIdByLogin");
+            logger.warn("SQLException in UserDAO.getUserIdByLogin");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -111,7 +109,7 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.getUsernameById");
+            logger.warn("SQLException in UserDAO.getUsernameById");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -132,7 +130,7 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in UserDAO.getEmployeeLogins");
+            logger.warn("SQLException in UserDAO.getEmployeeLogins");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -155,7 +153,7 @@ public class UserDAO implements IUserDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.getLoginById");
+            logger.warn("SQLException in UserDAO.getLoginById");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -174,7 +172,7 @@ public class UserDAO implements IUserDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.setManager");
+            logger.warn("SQLException in UserDAO.setManager");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -193,7 +191,7 @@ public class UserDAO implements IUserDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in UserDAO.demoteManager");
+            logger.warn("SQLException in UserDAO.demoteManager");
         } finally {
             connectionPool.releaseConnection(connection);
         }

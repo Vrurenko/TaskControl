@@ -11,7 +11,6 @@ public class Proposal {
     private String description;
     @NotEmpty
     private String name;
-    @NotEmpty
     private String customer;
     private boolean approved;
 

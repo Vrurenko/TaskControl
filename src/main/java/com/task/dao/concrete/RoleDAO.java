@@ -2,11 +2,13 @@ package com.task.dao.concrete;
 
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.IRoleDAO;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class RoleDAO implements IRoleDAO {
+    private static Logger logger = Logger.getLogger(RoleDAO.class);
     ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
@@ -20,12 +22,12 @@ public class RoleDAO implements IRoleDAO {
             while (resultSet.next()) {
                 list.add(resultSet.getString("position"));
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in RoleDAO.getRolesList");
+            logger.warn("SQLException in RoleDAO.getRolesList");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return list;
     }
@@ -41,12 +43,12 @@ public class RoleDAO implements IRoleDAO {
             while (resultSet.next()) {
                 list.add(resultSet.getString("position"));
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in RoleDAO.getAllowedRolesList");
+            logger.warn("SQLException in RoleDAO.getAllowedRolesList");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return list;
     }
@@ -63,12 +65,12 @@ public class RoleDAO implements IRoleDAO {
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in RoleDAO.getIdByRole");
+            logger.warn("SQLException in RoleDAO.getIdByRole");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return id;
     }
@@ -85,12 +87,12 @@ public class RoleDAO implements IRoleDAO {
             while (resultSet.next()) {
                 role = resultSet.getString("position");
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in RoleDAO.getRoleById");
+            logger.warn("SQLException in RoleDAO.getRoleById");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return role;
     }

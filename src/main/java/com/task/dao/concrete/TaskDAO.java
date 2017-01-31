@@ -4,11 +4,13 @@ import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.ITaskDAO;
 import com.task.model.Task;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class TaskDAO implements ITaskDAO {
+    private static Logger logger = Logger.getLogger(TaskDAO.class);
     private ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
@@ -18,7 +20,7 @@ public class TaskDAO implements ITaskDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM TASK WHERE SPRINT = ?");
+                    .prepareStatement("SELECT * FROM TASK WHERE SPRINT = ? ORDER BY ID");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -36,7 +38,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getTasksBySprintID");
+            logger.warn("SQLException in TaskDAO.getTasksBySprintID");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -67,7 +69,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getTaskNameById");
+            logger.warn("SQLException in TaskDAO.getTaskNameById");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -90,7 +92,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getTaskNameById");
+            logger.warn("SQLException in TaskDAO.getTaskNameById");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -122,7 +124,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getFreeFromTaskEmployees");
+            logger.warn("SQLException in TaskDAO.getFreeFromTaskEmployees");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -142,7 +144,7 @@ public class TaskDAO implements ITaskDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.setEmployeeToTask");
+            logger.warn("SQLException in TaskDAO.setEmployeeToTask");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -167,7 +169,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getTaskEmployees");
+            logger.warn("SQLException in TaskDAO.getTaskEmployees");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -181,7 +183,7 @@ public class TaskDAO implements ITaskDAO {
         try {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("SELECT * FROM TASK LEFT JOIN USER_TASK_MAP ON TASK_ID = TASK.ID WHERE USER_ID = ? AND COMPLETE = 0");
+                    .prepareStatement("SELECT * FROM TASK LEFT JOIN USER_TASK_MAP ON TASK_ID = TASK.ID WHERE USER_ID = ? AND COMPLETE = 0 ORDER BY ID");
             preparedStatement.setInt(1, userID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -200,7 +202,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getEmployeeTasks");
+            logger.warn("SQLException in TaskDAO.getEmployeeTasks");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -219,7 +221,7 @@ public class TaskDAO implements ITaskDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.confirmTaskByID");
+            logger.warn("SQLException in TaskDAO.confirmTaskByID");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -240,7 +242,7 @@ public class TaskDAO implements ITaskDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.completeTaskByID");
+            logger.warn("SQLException in TaskDAO.completeTaskByID");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -270,7 +272,7 @@ public class TaskDAO implements ITaskDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.addTask");
+            logger.warn("SQLException in TaskDAO.addTask");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -293,7 +295,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getTaskIdByName");
+            logger.warn("SQLException in TaskDAO.getTaskIdByName");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -316,7 +318,7 @@ public class TaskDAO implements ITaskDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in TaskDAO.getLastSprintTaskNames");
+            logger.warn("SQLException in TaskDAO.getLastSprintTaskNames");
         } finally {
             connectionPool.releaseConnection(connection);
         }

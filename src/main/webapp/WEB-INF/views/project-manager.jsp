@@ -5,17 +5,26 @@
 <html>
 <head>
     <title>Manager</title>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
-    <%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
-    <%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
+    <style>
+        .table{
+            font-size: 9pt;
+            font-weight: 400;
+        }
+        div.panel-heading{
+            height: 20px;
+            padding:0;
+        }
+    </style>
 </head>
 <body>
 
-<div id="header">
-    <jsp:include page="header.jsp"/>
-</div>
-<%--<div class="container-fluid">--%>
+
+<div class="container">
+
+    <div id="header">
+        <jsp:include page="header.jsp"/>
+    </div>
+
     <div class="col-md-12">
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -29,7 +38,6 @@
                         <th>Name</th>
                         <th>StartDate</th>
                         <th>EndDate</th>
-                        <th>Complete?</th>
                         </thead>
                         <tbody>
                         <c:forEach items="${sprintList}" var="item">
@@ -38,7 +46,6 @@
                                 <td>${item.name}</td>
                                 <td>${item.startDate}</td>
                                 <td>${item.endDate}</td>
-                                <td>${item.complete}</td>
                                 <td>${item.complete ? "" : "<button id='close'>Close</button>"}</td>
                             </tr>
                         </c:forEach>
@@ -49,7 +56,6 @@
 
 
             <button id="newSprint">+</button>
-
 
 
             <div class="panel panel-default">
@@ -91,11 +97,12 @@
             </div>
         </div>
     </div>
-<%--</div>--%>
+</div>
 
 
 </body>
-
+<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script>
     var rebuildSprintList = function () {
         $.ajax({
@@ -153,6 +160,10 @@
                 $("#sprintEnd").after('<button id="sendSprint">Create</button>');
                 $('#sprintEnd').prop('min', tomorrow());
                 $('#sprintEnd').prop('value', tomorrow());
+            } else {
+                for (i = 0; i < 3; i++){
+                    $("#newSprint").next().remove();
+                }
             }
         });
     });
@@ -219,6 +230,10 @@
                         $("#subTask").append(options);
                     }
                 });
+            } else {
+                for (i = 0; i < 5; i++){
+                    $("#newTask").next().remove();
+                }
             }
         });
     });
@@ -311,7 +326,9 @@
 //                            + '<tr>' + '<th>Remaining</th>' + '<td>' + Math.abs(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / 864e5 + '</td>' + '</tr>'
                             + '<tr>' + '<th>Qualification</th>' + '<td>' + response.qualification + '</td>' + '</tr>'
                             + '<tr>' + '<th>Complete</th>' + '<td>' + response.complete + '</td>' + '</tr>'
-                            + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td><td><button id="getExe">+</button></td>' + '</tr>';
+//                            + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td><td><button id="getExe">+</button></td>' + '</tr>';
+                            + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td>' + '</tr>'
+                            + '<tr>' + '<th></th>' + '<td></td><td><button id="getExe">+</button></td>' + '</tr>';
                     $("#Task > tbody").append(tr);
                     var list = '';
                     $.ajax({
@@ -348,10 +365,10 @@
                         }
                         select += '</select>';
                         var add = '<button id="addExe">Send</button>';
-                        if (parseInt(event.currentTarget.parentElement.childNodes.length) > 1) {
-                            $(event.currentTarget.parentElement.childNodes[2]).remove();
-                            $(event.currentTarget.parentElement.childNodes[1]).remove();
-                        }
+//                        if (parseInt(event.currentTarget.parentElement.childNodes.length) > 1) {
+//                            $(event.currentTarget.parentElement.childNodes[2]).remove();
+//                            $(event.currentTarget.parentElement.childNodes[1]).remove();
+//                        }
                         $(position).append(select).append(add);
                     } else {
                         alert('Nobody to add');
@@ -368,7 +385,8 @@
             var executerName = event.currentTarget.parentElement.childNodes[1].selectedOptions[0].innerHTML;
             var select = event.currentTarget.parentElement.childNodes[1];
             var send = event.currentTarget.parentElement.childNodes[2];
-            var toAddList = event.currentTarget.parentElement.parentElement.childNodes[1];
+            var toAddList = event.currentTarget.parentNode.parentNode.parentNode.childNodes[8].childNodes[1];
+
             $.ajax({
                 type: "POST",
                 url: "/project-manager/task/" + taskID + "/emp/" + executerName,

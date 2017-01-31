@@ -74,4 +74,10 @@ public interface IManagerService {
      * @return true if the task was created successfully, otherwise false.
      */
     boolean addTask(Task task);
+
+    /**
+     * Closes specified project.
+     * @return true id the project was closed successfully, otherwise false.
+     */
+    boolean closeProject();
 }

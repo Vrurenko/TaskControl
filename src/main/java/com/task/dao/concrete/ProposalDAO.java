@@ -1,14 +1,17 @@
 package com.task.dao.concrete;
 
+import com.task.controller.AdminController;
 import com.task.dao.AbstractDAOFactory;
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.IProposalDAO;
 import com.task.model.Proposal;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class ProposalDAO implements IProposalDAO {
+    private static Logger logger = Logger.getLogger(ProposalDAO.class);
     ConnectionPool connectionPool = new ConnectionPool();
 
     public boolean createProposal(Proposal proposal) {
@@ -20,15 +23,12 @@ public class ProposalDAO implements IProposalDAO {
             preparedStatement.setString(1, proposal.getName());
             preparedStatement.setString(2, proposal.getDescription());
             preparedStatement.setInt(3, AbstractDAOFactory.getDAOFactory().getUserDAO().getUserIdByLogin(proposal.getCustomer()));
-            if (preparedStatement.executeUpdate() > 0){
-                result = true;
-            }
+            result = preparedStatement.executeUpdate() > 0;
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProposalDAO.createProposal");
+            logger.warn("SQLException in ProposalDAO.createProposal");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return result;
     }
@@ -53,7 +53,7 @@ public class ProposalDAO implements IProposalDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in ProposalDAO.getProposalsByCustomer");
+            logger.warn("SQLException in ProposalDAO.getProposalsByCustomer");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -81,7 +81,7 @@ public class ProposalDAO implements IProposalDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in ProposalDAO.getProposalList");
+            logger.warn("SQLException in ProposalDAO.getProposalList");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -96,15 +96,12 @@ public class ProposalDAO implements IProposalDAO {
             connection = connectionPool.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE PROPOSAL SET APPROVED = 1 WHERE ID = ?");
             preparedStatement.setInt(1, id);
-            if (preparedStatement.executeUpdate() > 0){
-                result = true;
-            }
+            result = preparedStatement.executeUpdate() > 0;
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in ProposalDAO.approveProposal");
+            logger.warn("SQLException in ProposalDAO.approveProposal");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return result;
     }
@@ -118,15 +115,13 @@ public class ProposalDAO implements IProposalDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT CUSTOMER FROM PROPOSAL WHERE ID = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 customerId = resultSet.getInt("customer");
             }
         } catch (SQLException e) {
-            System.out.println("SQLException in ProposalDAO.getCustomerIdByProposalId");
+            logger.warn("SQLException in ProposalDAO.getCustomerIdByProposalId");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return customerId;
     }

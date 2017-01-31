@@ -33,4 +33,8 @@ public class OracleDAOFactory extends AbstractDAOFactory {
         return new UserDAO();
     }
 
+    public IReportDAO getReportDAO() {
+        return new ReportDAO();
+    }
+
 }

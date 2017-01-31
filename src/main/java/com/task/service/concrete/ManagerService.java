@@ -81,4 +81,10 @@ public class ManagerService implements IManagerService {
         return AbstractDAOFactory.getDAOFactory().getTaskDAO().addTask(task, sprintID);
     }
 
+    @Override
+    public boolean closeProject() {
+        AbstractDAOFactory.getDAOFactory().getUserDAO().demoteManager(principalService.getCurrentPrincipal());
+        return AbstractDAOFactory.getDAOFactory().getProjectDAO().closeProject(getPrincipalProjectID());
+    }
+
 }

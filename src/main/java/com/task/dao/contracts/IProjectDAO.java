@@ -34,4 +34,11 @@ public interface IProjectDAO {
      */
     int getProjectIdByCustomer(int id);
 
+    /**
+     * Closes specified project.
+     * @param projectID the project id.
+     * @return true id the project was slosed successfully, otherwise false.
+     */
+    boolean closeProject(int projectID);
+
 }

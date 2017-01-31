@@ -2,6 +2,7 @@ package com.task.controller;
 
 import com.task.model.Task;
 import com.task.service.contracts.IEmployeeService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 @Controller
 public class EmployeeController {
+    private static Logger logger = Logger.getLogger(EmployeeController.class);
 
     @Autowired
     IEmployeeService employeeService;
@@ -21,6 +23,7 @@ public class EmployeeController {
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public String getAll(ModelMap model) {
         model.addAttribute("taskList", employeeService.getEmployeeTasks());
+        logger.info("Forwarded to admin");
         return "employee";
     }
 
@@ -35,6 +38,7 @@ public class EmployeeController {
     public
     @ResponseBody
     boolean complete(@PathVariable int id) {
+        logger.info("Forwarded to admin");
         return employeeService.completeTask(id);
     }
 
@@ -42,6 +46,7 @@ public class EmployeeController {
     public
     @ResponseBody
     ArrayList<Task> tasks() {
+        logger.info("Forwarded to admin");
         return employeeService.getEmployeeTasks();
     }
 

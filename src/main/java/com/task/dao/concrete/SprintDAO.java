@@ -3,6 +3,7 @@ package com.task.dao.concrete;
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.ISprintDAO;
 import com.task.model.Sprint;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SprintDAO implements ISprintDAO {
+    private static Logger logger = Logger.getLogger(SprintDAO.class);
     private ConnectionPool connectionPool = new ConnectionPool();
 
     public ArrayList<Sprint> getSprintList(int projectID) {
@@ -33,7 +35,7 @@ public class SprintDAO implements ISprintDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in SprintDAO.getSprintList");
+            logger.warn("SQLException in SprintDAO.getSprintList");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -56,7 +58,7 @@ public class SprintDAO implements ISprintDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in SprintDAO.getSprintNameByID");
+            logger.warn("SQLException in SprintDAO.getSprintNameByID");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -77,7 +79,7 @@ public class SprintDAO implements ISprintDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in SprintDAO.createSprint");
+            logger.warn("SQLException in SprintDAO.createSprint");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -98,7 +100,7 @@ public class SprintDAO implements ISprintDAO {
             result = preparedStatement.executeUpdate() > 0;
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in SprintDAO.closeSprint");
+            logger.warn("SQLException in SprintDAO.closeSprint");
         } finally {
             connectionPool.releaseConnection(connection);
         }
@@ -121,7 +123,7 @@ public class SprintDAO implements ISprintDAO {
             connectionPool.closeResultSet(resultSet);
             connectionPool.closeStatement(preparedStatement);
         } catch (SQLException e) {
-            System.out.println("SQLException in SprintDAO.getLastSprintID");
+            logger.warn("SQLException in SprintDAO.getLastSprintID");
         } finally {
             connectionPool.releaseConnection(connection);
         }

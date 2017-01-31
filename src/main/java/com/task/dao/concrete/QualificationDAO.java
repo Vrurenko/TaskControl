@@ -2,6 +2,7 @@ package com.task.dao.concrete;
 
 import com.task.dao.ConnectionPool;
 import com.task.dao.contracts.IQualificationDAO;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class QualificationDAO implements IQualificationDAO {
+    private static Logger logger = Logger.getLogger(QualificationDAO.class);
     ConnectionPool connectionPool = new ConnectionPool();
 
     @Override
@@ -23,12 +25,12 @@ public class QualificationDAO implements IQualificationDAO {
             while (resultSet.next()) {
                 list.add(resultSet.getString("position"));
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in QualificationDAO.getQualificationsList");
+            logger.warn("SQLException in QualificationDAO.getQualificationsList");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return list;
     }
@@ -45,12 +47,12 @@ public class QualificationDAO implements IQualificationDAO {
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
-            System.out.println("SQLException in QualificationDAO.getIdByQualification");
+            logger.warn("SQLException in QualificationDAO.getIdByQualification");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return id;
     }
@@ -67,12 +69,12 @@ public class QualificationDAO implements IQualificationDAO {
             while (resultSet.next()) {
                 qualification = resultSet.getString("position");
             }
+            connectionPool.closeResultSet(resultSet);
+            connectionPool.closeStatement(preparedStatement);
         } catch (SQLException ex) {
             System.out.println("SQLException in QualificationDAO.getQualificationById");
         } finally {
-            if (connection != null) {
-                connectionPool.releaseConnection(connection);
-            }
+            connectionPool.releaseConnection(connection);
         }
         return qualification;
     }

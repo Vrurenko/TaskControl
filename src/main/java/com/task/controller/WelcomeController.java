@@ -11,12 +11,14 @@ public class WelcomeController {
     private static final Logger logger = Logger.getLogger(WelcomeController.class);
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(ModelMap model) {
+    public String index() {
+        logger.info("Forwarded to login");
         return "login";
     }
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcomeTest(ModelMap model) {
+        logger.info("Forwarded to welcome");
         return "welcome";
     }
 

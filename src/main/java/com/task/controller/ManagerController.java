@@ -4,6 +4,7 @@ import com.task.dao.AbstractDAOFactory;
 import com.task.model.Sprint;
 import com.task.model.Task;
 import com.task.service.contracts.IManagerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class ManagerController {
+    private static Logger logger = Logger.getLogger(ManagerController.class);
 
     @Autowired
     @Qualifier("managerService")
@@ -25,6 +27,7 @@ public class ManagerController {
     @RequestMapping(value = "/project-manager", method = RequestMethod.GET)
     public String viewManager(ModelMap modelMap) {
         modelMap.addAttribute("sprintList", managerService.getSprints());
+        logger.info("Forwarded to project-manager");
         return "project-manager";
     }
 
@@ -105,4 +108,12 @@ public class ManagerController {
     boolean addTask(@ModelAttribute Task task, BindingResult bindingResult) {
         return !bindingResult.hasErrors() && managerService.addTask(task);
     }
+
+    @RequestMapping(value = "/project-manager/project/close", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    boolean closeProject() {
+        return managerService.closeProject();
+    }
+
 }
