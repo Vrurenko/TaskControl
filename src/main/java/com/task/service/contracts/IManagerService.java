@@ -15,63 +15,63 @@ public interface IManagerService {
     ArrayList<Sprint> getSprints();
 
     /**
-     *
-     * @param id
-     * @return
+     * Returns the task by id.
+     * @param id the task id.
+     * @return the task.
      */
     Task getTaskByID(int id);
 
     /**
-     *
-     * @param taskID
-     * @return
+     * Returns a list of employees not working on specified task.
+     * @param taskID the task id.
+     * @return the list of employees.
      */
     ArrayList<String> getFreeFromTaskEmployees(int taskID);
 
     /**
-     *
-     * @param taskID
-     * @param login
-     * @return
+     * Sets an employee to perform a task.
+     * @param taskID the task id.
+     * @param login the employee login.
+     * @return true if the employee was set successfully, otherwise false.
      */
     boolean setEmployeeToTask(int taskID, String login);
 
     /**
-     *
-     * @param taskID
-     * @return
+     * Returns the list of employees working on the specified task.
+     * @param taskID the task id.
+     * @return the list of employees.
      */
     ArrayList<String> getTaskEmployees(int taskID);
 
     /**
-     *
-     * @param sprint
-     * @return
+     * Creates new sprint.
+     * @param sprint the sprint.
+     * @return true if the sprint was created successfully, otherwise false.
      */
     boolean createSprint(Sprint sprint);
 
     /**
-     *
-     * @return
+     * Closes a project last sprint.
+     * @return true if the sprint was closed successfully, otherwise false.
      */
     boolean closeSprint();
 
     /**
-     *
-     * @return
+     * Returns the qualification list.
+     * @return the qualification list.
      */
     ArrayList<String> getQualifications();
 
     /**
-     *
-     * @return
+     * Returns the project last sprint task names list.
+     * @return the task names list.
      */
     ArrayList<String> getTaskNames();
 
     /**
-     *
-     * @param task
-     * @return
+     * Creates a nes task.
+     * @param task the task.
+     * @return true if the task was created successfully, otherwise false.
      */
     boolean addTask(Task task);
 }

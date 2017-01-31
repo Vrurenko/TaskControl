@@ -70,21 +70,4 @@ public class UserService implements IUserService {
         return AbstractDAOFactory.getDAOFactory().getQualificationDAO().getQualificationsList();
     }
 
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String getCurrentPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
-
 }

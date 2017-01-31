@@ -6,33 +6,33 @@ import java.util.ArrayList;
 import java.util.Map;
 
 /**
- * Provides service to perform administrator duties.
+ * Provides service to perform user duties.
  */
 public interface IUserService {
     /**
-     * @param username
-     * @return
+     * Returns the map with user information required for authentication.
+     * @param username the user login.
+     * @return the map.
      */
     Map<String, Object> getUserByUsername(String username);
 
     /**
-     * @param user
-     * @return
+     * Creates new user.
+     * @param user the user.
+     * @return true if the user was created successfully, otherwise false.
      */
     boolean addUser(User user);
 
     /**
-     * @return
+     * Returns the roles list.
+     * @return roles list.
      */
     ArrayList<String> getRoles();
 
     /**
-     * @return
+     * Returns the qualifications list.
+     * @return the qualifications list.
      */
     ArrayList<String> getQualifications();
 
-    /**
-     * @return
-     */
-    String getCurrentPrincipal();
 }

@@ -1,16 +1,18 @@
 package com.task.service.contracts;
 
 /**
- * Provides service to perform administrator duties.
+ * Provides service to perform principal duties.
  */
 public interface IPrincipalService {
     /**
-     * @return
+     * Returns the current authorised user login
+     * @return user login
      */
     String getCurrentPrincipal();
 
     /**
-     * @return
+     * returns the current authorised user id.
+     * @return user id
      */
     int getCurrentPrincipalID();
 }
