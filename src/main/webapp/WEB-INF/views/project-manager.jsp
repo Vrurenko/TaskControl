@@ -434,9 +434,8 @@
             type: "POST",
             url: "/project-manager/project/close",
             success: function (response) {
-                alert(response)
                 if (response) {
-
+                    document.location.href = "/j_spring_security_logout";
                 } else {
                     rebuildSprintList();
                 }

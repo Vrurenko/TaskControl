@@ -29,7 +29,7 @@
             </div>
 
             <div class="navbar-header navbar-brand col-sm-offset-3">
-                <a href="<c:url value="/j_spring_security_logout"/>">
+                <a href="<c:url value="/j_spring_security_logout"/>" id="out">
                     <spring:message code="header.logout"/>
                 </a>
             </div>

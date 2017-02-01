@@ -4,14 +4,6 @@
 <html>
 <head>
     <title>Report</title>
-    <style>
-        .expired{
-            background-color: rgba(255, 64, 14, 0.5);
-        }
-        .intime{
-            background-color: rgba(63, 255, 37, 0.5);
-        }
-    </style>
 </head>
 <body>
 
@@ -30,7 +22,7 @@
         </thead>
         <tbody>
         <c:forEach items="${taskDelay}" var="item">
-            <tr ${item.value < 0 ? "class='expired'" : "class='intime'"} >
+            <tr ${item.value < 0 ? "class='warning'" : "class='success'"} >
                 <td>${item.key}</td>
             </tr>
         </c:forEach>
