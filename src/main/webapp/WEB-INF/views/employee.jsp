@@ -1,29 +1,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>Employee</title>
+    <title><spring:message code="employee.title"/></title>
 </head>
 <body>
 <div>
     <jsp:include page="header.jsp"/>
 </div>
 <div class="container container-fluid table-responsive">
-    <h1>Your tasks:</h1>
+    <h1><spring:message code="employee.tasklist"/></h1>
     <table id="tasks" class="table table-hover table-condensed">
         <c:if test="${not empty taskList}">
         <thead>
         <th>ID</th>
-        <th>Name</th>
-        <th>Sprint</th>
-        <th>SubTaskOf</th>
-        <th>Estimate</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>Accepted</th>
-        <th></th>
-        <th>Action</th>
+        <th><spring:message code="customer.name"/></th>
+        <th><spring:message code="employee.sprint"/></th>
+        <th><spring:message code="customer.primary"/></th>
+        <th><spring:message code="customer.estimate"/></th>
+        <th><spring:message code="customer.start"/></th>
+        <th><spring:message code="customer.end"/></th>
+        <th colspan="2"></th>
         </thead>
         <tbody>
         <c:forEach items="${taskList}" var="item">
@@ -35,9 +34,10 @@
                 <td>${item.estimate}</td>
                 <td>${item.startDate}</td>
                 <td>${item.endDate}</td>
-                <td>${item.confirm}</td>
-                <td>${item.confirm ? '' : '<button class="button btn btn-default">Confirm</button>'}</td>
-                <td>${item.confirm ? '<button class="button btn btn-primary" + >Complete</button>' : ''}</td>
+                <spring:message code="employee.button.confirm" var="i18nconfirm"/>
+                <td>${item.confirm ? '' : '<button class="button btn btn-default">'.concat(i18nconfirm).concat('</button>')}</td>
+                <spring:message code="employee.button.complete" var="i18ncomplete"/>
+                <td>${item.confirm ? '<button class="button btn btn-primary">'.concat(i18ncomplete).concat('</button>') : ''}</td>
             </tr>
         </c:forEach>
         </c:if>
@@ -84,7 +84,7 @@
                                 $("#tasks > tbody").append(tr);
                             }
                         }
-                    },
+                    }
                 });
             };
 
@@ -103,7 +103,6 @@
                     }
                 }).done(rebuild);
             }
-
         });
     });
 </script>

@@ -1,9 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Report</title>
+    <title><spring:message code="report.title"/></title>
 </head>
 <body>
 
@@ -11,14 +12,14 @@
     <jsp:include page="header.jsp"/>
 </div>
 <div align="center">
-    <h3><a href="/downloadExcel">Download Excel Document</a></h3>
+    <h3><a href="/downloadExcel"><spring:message code="report.download"/></a></h3>
 </div>
 
 <div class="container container-fluid table-responsive">
     <table class="table table-hover table-condensed">
         <c:if test="${not empty taskDelay}">
         <thead>
-        <th>Task</th>
+        <th><spring:message code="report.taskname"/></th>
         </thead>
         <tbody>
         <c:forEach items="${taskDelay}" var="item">

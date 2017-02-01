@@ -2,25 +2,18 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title>Manager</title>
+    <title><spring:message code="manager.title"/></title>
     <style>
         .table {
             font-size: 9pt;
             font-weight: 400;
         }
-
         div.panel-heading {
             height: 20px;
             padding: 0;
-        }
-        .completed {
-            background-color: rgba(98, 255, 37, 0.5);
-        }
-
-        .uncompleted {
-            background-color: rgba(255, 151, 221, 0.5);
         }
         .without-margin-bottom{
             margin-bottom: 5px;
@@ -40,22 +33,22 @@
     </div>
 
     <div class="col-sm-offset-7">
-        <button class="button btn btn-primary" onclick="releaseProject()">Release</button>
+        <button class="button btn btn-primary" onclick="releaseProject()"><spring:message code="manager.release"/></button>
     </div>
 
     <div class="col-md-12">
         <div class="col-md-8">
             <div class="panel panel-default without-margin-bottom">
                 <div class="panel-heading">
-                    <h4 class="text-center">SPRINTS</h4>
+                    <h4 class="text-center"><spring:message code="manager.sprint.caption"/></h4>
                 </div>
                 <table id="sprintTable" class="table table-hover">
                     <c:if test="${not empty sprintList}">
                         <thead>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>StartDate</th>
-                        <th>EndDate</th>
+                        <th><spring:message code="manager.name"/></th>
+                        <th><spring:message code="manager.start"/></th>
+                        <th><spring:message code="manager.end"/></th>
                         </thead>
                         <tbody>
                         <c:forEach items="${sprintList}" var="item">
@@ -64,7 +57,8 @@
                                 <td>${item.name}</td>
                                 <td>${item.startDate}</td>
                                 <td>${item.endDate}</td>
-                                <td>${item.complete ? "" : "<button id='close' class='button btn btn-primary'>Close</button>"}</td>
+                                <spring:message code="manager.close" var="i18nclose"/>
+                                <td>${item.complete ? "" : "<button id='close' class='button btn btn-primary'>".concat(i18nclose).concat("</button>")}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -80,19 +74,19 @@
 
             <div class="panel panel-default without-margin-bottom">
                 <div class="panel-heading">
-                    <h4 class="text-center">TASKS</h4>
+                    <h4 class="text-center"><spring:message code="manager.tasks.caption"/></h4>
                 </div>
                 <table id="taskTable" class="table table-hover">
                     <thead>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Estimate(d)</th>
-                    <th>Primary</th>
-                    <th>StartDate</th>
-                    <th>EndDate</th>
-                    <th>Qualification</th>
+                    <th><spring:message code="manager.name"/></th>
+                    <th><spring:message code="manager.estimate"/></th>
+                    <th><spring:message code="manager.primary"/></th>
+                    <th><spring:message code="manager.start"/></th>
+                    <th><spring:message code="manager.end"/></th>
+                    <th><spring:message code="manager.qualification"/></th>
                     </thead>
-                    <tbody align="center">
+                    <tbody>
                     </tbody>
                 </table>
             </div>
@@ -111,7 +105,7 @@
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="text-center">TASK</h4>
+                    <h4 class="text-center"><spring:message code="manager.task.caption"/></h4>
                 </div>
                 <table id="Task" class="table table-hover">
                     <thead>
@@ -229,7 +223,7 @@
                 $("#taskName").closest("div").after('<div class="col-md-2"><input class="form-control" type = number min="1" id="taskEstimate" placeholder="Days"></div>');
                 $("#taskEstimate").closest("div").after('<div class="col-md-2"><select id="primary" class="form-control"></select></div>');
                 $("#primary").closest("div").after('<div class="col-md-2"><select id="qualification" class="form-control"></select></div>');
-                $('#qualification').closest("div").after('<div class="col-md-2"><button id="sendTask" class="button btn btn-primary">SendTask</button></div>');
+                $('#qualification').closest("div").after('<div class="col-md-2"><button id="sendTask" class="button btn btn-primary">Create</button></div>');
                 $('#taskEnd').prop('min', tomorrow());
                 $('#taskEnd').prop('value', tomorrow());
                 $.ajax({
@@ -319,7 +313,7 @@
                             $("#taskTable > tbody").append(tr);
                         }
                     }
-                },
+                }
             });
         });
     });
@@ -344,7 +338,7 @@
                             + '<tr>' + '<th>Qualification</th>' + '<td>' + response.qualification + '</td>' + '</tr>'
                             + '<tr>' + '<th>Complete</th>' + '<td>' + response.complete + '</td>' + '</tr>'
                             + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td>' + '</tr>'
-                            + '<tr>' + '<th></th>' + '<td></td><td><button id="getExe" class="button btn btn-primary">+</button></td>' + '</tr>';
+                            + '<tr>' + '<th></th>' + '<td></td><td><button id="getExe" class="button btn-sd btn-primary">+</button></td>' + '</tr>';
                     $("#Task > tbody").append(tr);
                     var list = '';
                     $.ajax({
@@ -381,7 +375,7 @@
                                 select += '<option>' + response[i] + '</option>';
                             }
                             select += '</select>';
-                            var add = '<button id="addExe" class="button btn btn-primary">Send</button>';
+                            var add = '<button id="addExe" class="button btn-sd btn-primary">Send</button>';
                             $(position).append(select).append(add);
                         } else {
                             $("#getExe").next().remove();
