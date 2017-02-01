@@ -6,13 +6,27 @@
 <head>
     <title>Manager</title>
     <style>
-        .table{
+        .table {
             font-size: 9pt;
             font-weight: 400;
         }
-        div.panel-heading{
+
+        div.panel-heading {
             height: 20px;
-            padding:0;
+            padding: 0;
+        }
+        .completed {
+            background-color: rgba(98, 255, 37, 0.5);
+        }
+
+        .uncompleted {
+            background-color: rgba(255, 151, 221, 0.5);
+        }
+        .without-margin-bottom{
+            margin-bottom: 5px;
+        }
+        .append-margin-bottom{
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -25,9 +39,13 @@
         <jsp:include page="header.jsp"/>
     </div>
 
+    <div class="col-sm-offset-7">
+        <button class="button btn btn-primary" onclick="releaseProject()">Release</button>
+    </div>
+
     <div class="col-md-12">
         <div class="col-md-8">
-            <div class="panel panel-default">
+            <div class="panel panel-default without-margin-bottom">
                 <div class="panel-heading">
                     <h4 class="text-center">SPRINTS</h4>
                 </div>
@@ -41,12 +59,12 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${sprintList}" var="item">
-                            <tr id="${item.id}">
+                            <tr id="${item.id}" class="${item.complete ? "success" : "warning"}">
                                 <td>${item.id}</td>
                                 <td>${item.name}</td>
                                 <td>${item.startDate}</td>
                                 <td>${item.endDate}</td>
-                                <td>${item.complete ? "" : "<button id='close'>Close</button>"}</td>
+                                <td>${item.complete ? "" : "<button id='close' class='button btn btn-primary'>Close</button>"}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -54,11 +72,13 @@
                 </table>
             </div>
 
+            <div class="form-inline append-margin-bottom">
+                <button id="newSprint" class='button btn btn-primary'>+</button>
+            </div>
 
-            <button id="newSprint">+</button>
 
 
-            <div class="panel panel-default">
+            <div class="panel panel-default without-margin-bottom">
                 <div class="panel-heading">
                     <h4 class="text-center">TASKS</h4>
                 </div>
@@ -66,19 +86,24 @@
                     <thead>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Estimate</th>
-                    <th>SubTaskOf</th>
+                    <th>Estimate(d)</th>
+                    <th>Primary</th>
                     <th>StartDate</th>
                     <th>EndDate</th>
-                    <th>Remaining(d)</th>
                     <th>Qualification</th>
-                    <th>Complete?</th>
                     </thead>
                     <tbody align="center">
                     </tbody>
                 </table>
             </div>
-            <button id="newTask">+</button>
+            <%--<div class="form-inline">--%>
+                <div class="form-group" id="first">
+                    <div class="col-md-1">
+                        <button id="newTask" class="button btn btn-primary">+</button>
+                    </div>
+                </div>
+            <%--</div>--%>
+
 
         </div>
 
@@ -115,13 +140,12 @@
                     $("table#sprintTable > thead").show();
                     var tbody = '';
                     for (i = 0; i < parseInt(response.length); i++) {
-                        tbody += '<tr id=' + response[i].id + '>'
+                        tbody += '<tr id=' + response[i].id + ' class="' + (response[i].complete ? "success" : "warning") + '">'
                                 + '<td>' + response[i].id + '</td>'
                                 + '<td>' + response[i].name + '</td>'
                                 + '<td>' + response[i].startDate + '</td>'
-                                + '<td>' + response[i].endDate + '</td>'
-                                + '<td>' + response[i].complete + '</td>'
-                                + '<td>' + (response[i].complete ? '' : '<button id="close">Close</button>') + '</td>'
+                                + '<td>' + (response[i].endDate || '') + '</td>'
+                                + '<td>' + (response[i].complete ? '' : '<button id="close" class="button btn btn-primary">Close</button>') + '</td>'
                                 + '</tr>';
                     }
                     $("table#sprintTable > tbody").append(tbody);
@@ -137,7 +161,7 @@
                 url: "/project-manager/sprint/close",
                 success: function (response) {
                     rebuildSprintList();
-                },
+                }
             });
         });
     });
@@ -155,13 +179,13 @@
         };
         $("#newSprint").on("click", function () {
             if (!$("#sprintName").length) {
-                $("#newSprint").after('<input type = text id="sprintName" placeholder="Project Name">');
-                $("#sprintName").after('<input type = date id="sprintEnd">');
-                $("#sprintEnd").after('<button id="sendSprint">Create</button>');
+                $("#newSprint").after('<input class="form-control" type = text id="sprintName" placeholder="Project Name">');
+                $("#sprintName").after('<input class="form-control" type = date id="sprintEnd">');
+                $("#sprintEnd").after('<button id="sendSprint" class="button btn btn-primary">Create</button>');
                 $('#sprintEnd').prop('min', tomorrow());
                 $('#sprintEnd').prop('value', tomorrow());
             } else {
-                for (i = 0; i < 3; i++){
+                for (i = 0; i < 3; i++) {
                     $("#newSprint").next().remove();
                 }
             }
@@ -200,12 +224,12 @@
             return new Date().addDays(1).toJSON().split('T')[0];
         };
         $("#newTask").on("click", function () {
-            if (!$("#taskName").length) {
-                $("#newTask").after('<input type = text id="taskName" placeholder="Task Name">');
-                $("#taskName").after('<input type = number min="1" id="taskEstimate" placeholder="Days">');
-                $("#taskEstimate").after('<select id="subTask" ></select>');
-                $("#subTask").after('<select id="qualification" ></select>');
-                $('#qualification').after('<button id="sendTask">SendTask</button>');
+            if ($("#first").contents().length == 3) {
+                $("#newTask").closest("div").after('<div class="col-md-3"><input class="form-control " type = text id="taskName" placeholder="Task Name"></div>');
+                $("#taskName").closest("div").after('<div class="col-md-2"><input class="form-control" type = number min="1" id="taskEstimate" placeholder="Days"></div>');
+                $("#taskEstimate").closest("div").after('<div class="col-md-2"><select id="primary" class="form-control"></select></div>');
+                $("#primary").closest("div").after('<div class="col-md-2"><select id="qualification" class="form-control"></select></div>');
+                $('#qualification').closest("div").after('<div class="col-md-2"><button id="sendTask" class="button btn btn-primary">SendTask</button></div>');
                 $('#taskEnd').prop('min', tomorrow());
                 $('#taskEnd').prop('value', tomorrow());
                 $.ajax({
@@ -227,12 +251,12 @@
                         for (i = 0; i < parseInt(response.length); i++) {
                             options += '<option>' + response[i] + '</option>';
                         }
-                        $("#subTask").append(options);
+                        $("#primary").append(options);
                     }
                 });
             } else {
-                for (i = 0; i < 5; i++){
-                    $("#newTask").next().remove();
+                for (i = 0; i < 5; i++) {
+                    $("#first").contents()[2].remove();
                 }
             }
         });
@@ -242,7 +266,7 @@
         $(document).delegate("button#sendTask", "click", function () {
             var name = $("#taskName").val();
             var estimate = $("#taskEstimate").val();
-            var subTask = $("#subTask").val();
+            var primary = $("#primary").val();
             var qualification = $("#qualification").val();
             var currentSprint = $("table#sprintTable").find('tr').last();
             debugger;
@@ -251,12 +275,12 @@
                 url: "/project-manager/task/add",
                 data: "name=" + name
                 + "&estimate=" + estimate
-                + "&primaryTask=" + (subTask == 'Empty' ? null : subTask)
+                + "&primaryTask=" + (primary == 'Empty' ? null : primary)
                 + "&qualification=" + qualification,
                 success: function (response) {
                     $("#taskName").remove();
                     $("#taskEstimate").remove();
-                    $("#subTask").remove();
+                    $("#primary").remove();
                     $("#qualification").remove();
                     $("#sendTask").remove();
                     currentSprint.click();
@@ -283,18 +307,14 @@
                         $("#taskTable > thead").show();
 
                         for (i = 0; i < parseInt(response.length); i++) {
-                            var startDate = response[i].startDate.split("-");
-                            endDate = new Date().setDate(new Date(startDate[0], startDate[1], startDate[2]).getDate() + response[i].estimate);
-                            var tr = '<tr ' + 'id="' + response[i].id + '"' + '>'
+                            var tr = '<tr ' + 'id="' + response[i].id + '"' + 'class="' + (response[i].complete ? "success" : "warning") + '"' + '>'
                                     + '<td>' + response[i].id + '</td>'
                                     + '<td>' + response[i].name + '</td>'
                                     + '<td>' + response[i].estimate + '</td>'
-                                    + '<td>' + response[i].primaryTask + '</td>'
+                                    + '<td>' + (response[i].primaryTask || '') + '</td>'
                                     + '<td>' + response[i].startDate + '</td>'
-                                    + '<td>' + response[i].endDate + '</td>'
-                                    + '<td>' + Math.round((new Date(endDate) - new Date()) / (1000 * 60 * 60 * 24)) + '</td>'
+                                    + '<td>' + (response[i].endDate || '') + '</td>'
                                     + '<td>' + response[i].qualification + '</td>'
-                                    + '<td>' + response[i].complete + '</td>'
                                     + '</tr>';
                             $("#taskTable > tbody").append(tr);
                         }
@@ -315,20 +335,16 @@
                 success: function (response) {
                     $("#Task > thead").empty();
                     $("#Task > tbody").empty();
-//                    var date1 = response.startDate.split("-");
-//                    var date2 = response.endDate.split("-");
                     var tr = '<tr>' + '<th>ID</th>' + '<td id="' + response.id + '">' + response.id + '</td>' + '</tr>'
                             + '<tr>' + '<th>Name</th>' + '<td>' + response.name + '</td>' + '</tr>'
                             + '<tr>' + '<th>Estimate</th>' + '<td>' + response.estimate + '</td>' + '</tr>'
-                            + '<tr>' + '<th>SubTaskOf</th>' + '<td>' + response.primaryTask + '</td>' + '</tr>'
+                            + '<tr>' + '<th>Primary</th>' + '<td>' + (response.primaryTask || '') + '</td>' + '</tr>'
                             + '<tr>' + '<th>StartDate</th>' + '<td>' + response.startDate + '</td>' + '</tr>'
                             + '<tr>' + '<th>EndDate</th>' + '<td>' + response.endDate + '</td>' + '</tr>'
-//                            + '<tr>' + '<th>Remaining</th>' + '<td>' + Math.abs(new Date(date2[0], date2[1], date2[2]) - new Date(date1[0], date1[1], date1[2])) / 864e5 + '</td>' + '</tr>'
                             + '<tr>' + '<th>Qualification</th>' + '<td>' + response.qualification + '</td>' + '</tr>'
                             + '<tr>' + '<th>Complete</th>' + '<td>' + response.complete + '</td>' + '</tr>'
-//                            + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td><td><button id="getExe">+</button></td>' + '</tr>';
                             + '<tr>' + '<th>Executors</th>' + '<td id="exe"></td>' + '</tr>'
-                            + '<tr>' + '<th></th>' + '<td></td><td><button id="getExe">+</button></td>' + '</tr>';
+                            + '<tr>' + '<th></th>' + '<td></td><td><button id="getExe" class="button btn btn-primary">+</button></td>' + '</tr>';
                     $("#Task > tbody").append(tr);
                     var list = '';
                     $.ajax({
@@ -340,9 +356,9 @@
                                 list += answer[i] + ',<br>';
                             }
                             $("#exe").append(list.slice(0, -5));
-                        },
+                        }
                     });
-                },
+                }
             });
         });
     });
@@ -359,21 +375,23 @@
                 url: "/project-manager/freeexecutors/" + id,
                 success: function (response) {
                     if (response.length > 0) {
-                        var select = '<select>';
-                        for (var i = 0; i < parseInt(response.length); i++) {
-                            select += '<option>' + response[i] + '</option>';
+                        if (!$("#addExe").length) {
+                            var select = '<select>';
+                            for (var i = 0; i < parseInt(response.length); i++) {
+                                select += '<option>' + response[i] + '</option>';
+                            }
+                            select += '</select>';
+                            var add = '<button id="addExe" class="button btn btn-primary">Send</button>';
+                            $(position).append(select).append(add);
+                        } else {
+                            $("#getExe").next().remove();
+                            $("#getExe").next().remove();
                         }
-                        select += '</select>';
-                        var add = '<button id="addExe">Send</button>';
-//                        if (parseInt(event.currentTarget.parentElement.childNodes.length) > 1) {
-//                            $(event.currentTarget.parentElement.childNodes[2]).remove();
-//                            $(event.currentTarget.parentElement.childNodes[1]).remove();
-//                        }
-                        $(position).append(select).append(add);
+
                     } else {
                         alert('Nobody to add');
                     }
-                },
+                }
             });
         });
     });
@@ -402,12 +420,29 @@
                                 list += response[i] + ',<br>'
                             }
                             $(toAddList).empty().append(list.slice(0, -5));
-                        },
+                        }
                     });
-                },
+                }
             });
         });
     });
+</script>
+
+<script>
+    var releaseProject = function () {
+        $.ajax({
+            type: "POST",
+            url: "/project-manager/project/close",
+            success: function (response) {
+                alert(response)
+                if (response) {
+
+                } else {
+                    rebuildSprintList();
+                }
+            }
+        });
+    }
 </script>
 
 

@@ -3,8 +3,6 @@
 <html>
 <head>
     <title>Login</title>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">--%>
-    <%--<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">--%>
     <style>
         #error {
             display: none;

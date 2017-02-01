@@ -83,8 +83,11 @@ public class ManagerService implements IManagerService {
 
     @Override
     public boolean closeProject() {
-        AbstractDAOFactory.getDAOFactory().getUserDAO().demoteManager(principalService.getCurrentPrincipal());
-        return AbstractDAOFactory.getDAOFactory().getProjectDAO().closeProject(getPrincipalProjectID());
+        boolean result = false;
+        if (AbstractDAOFactory.getDAOFactory().getProjectDAO().closeProject(getPrincipalProjectID())) {
+            result = AbstractDAOFactory.getDAOFactory().getUserDAO().demoteManager(principalService.getCurrentPrincipal());
+        }
+        return result;
     }
 
 }

@@ -7,13 +7,16 @@
 <head>
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap-theme.min.css"/>">
-    <%--<script src="<c:url value="/resources/js/http_code.jquery.com_jquery-1.10.2.js"/>"></script>--%>
-    <%--<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>--%>
+    <style>
+        .without-margin-bottom{
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
 
-    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+    <nav class="navbar navbar-default navbar-inverse without-margin-bottom" role="navigation">
 
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="/welcome">TaskControl</a>

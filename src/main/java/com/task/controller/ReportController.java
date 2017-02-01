@@ -21,7 +21,6 @@ public class ReportController {
 
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public String excelLoad(ModelMap model) {
-        System.out.println(AbstractDAOFactory.getDAOFactory().getReportDAO().getTaskReport());
         model.addAttribute("taskDelay", AbstractDAOFactory.getDAOFactory().getReportDAO().getTaskReport());
         logger.info("Forwarded to report");
         return "report";

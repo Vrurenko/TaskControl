@@ -21,7 +21,6 @@
         <th>Estimate</th>
         <th>StartDate</th>
         <th>EndDate</th>
-        <th>Remaining</th>
         <th>Accepted</th>
         <th></th>
         <th>Action</th>
@@ -36,7 +35,6 @@
                 <td>${item.estimate}</td>
                 <td>${item.startDate}</td>
                 <td>${item.endDate}</td>
-                <td></td>
                 <td>${item.confirm}</td>
                 <td>${item.confirm ? '' : '<button class="button btn btn-default">Confirm</button>'}</td>
                 <td>${item.confirm ? '<button class="button btn btn-primary" + >Complete</button>' : ''}</td>
@@ -77,7 +75,7 @@
                                         + '<td>' + (response[i].primaryTask || '') + '</td>\n'
                                         + '<td>' + response[i].estimate + '</td>\n'
                                         + '<td>' + response[i].startDate + '</td>\n'
-                                        + '<td>' + response[i].endDate + '</td>\n'
+                                        + '<td>' + (response[i].endDate || '') + '</td>\n'
                                         + '<td>' + '' + '</td>\n'
                                         + '<td>' + response[i].confirm + '</td>\n'
                                         + '<td>' + (response[i].confirm ? '' : '<button class="button btn btn-default" >Confirm</button>') + '</td>\n'
