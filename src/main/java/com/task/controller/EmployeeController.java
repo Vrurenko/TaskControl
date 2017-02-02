@@ -38,7 +38,6 @@ public class EmployeeController {
     public
     @ResponseBody
     boolean complete(@PathVariable int id) {
-        logger.info("Forwarded to admin");
         return employeeService.completeTask(id);
     }
 
@@ -46,7 +45,6 @@ public class EmployeeController {
     public
     @ResponseBody
     ArrayList<Task> tasks() {
-        logger.info("Forwarded to admin");
         return employeeService.getEmployeeTasks();
     }
 

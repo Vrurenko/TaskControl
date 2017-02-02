@@ -22,7 +22,8 @@
         <th><spring:message code="customer.estimate"/></th>
         <th><spring:message code="customer.start"/></th>
         <th><spring:message code="customer.end"/></th>
-        <th colspan="2"></th>
+        <th></th>
+        <th></th>
         </thead>
         <tbody>
         <c:forEach items="${taskList}" var="item">
@@ -53,7 +54,7 @@
 <script>
     $(document).ready(function () {
         $("table#tasks").delegate('.button', 'click', function (event) {
-            var notConfirmed = event.currentTarget.parentNode.parentNode.childNodes[19].childNodes.length;
+            var notConfirmed = event.currentTarget.parentNode.parentNode.childNodes[15].childNodes.length;
             var taskID = event.currentTarget.parentNode.parentNode.childNodes[1].childNodes[0].nodeValue;
             var head = event.currentTarget.parentNode.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
             var rebuild = function () {
@@ -76,8 +77,6 @@
                                         + '<td>' + response[i].estimate + '</td>\n'
                                         + '<td>' + response[i].startDate + '</td>\n'
                                         + '<td>' + (response[i].endDate || '') + '</td>\n'
-                                        + '<td>' + '' + '</td>\n'
-                                        + '<td>' + response[i].confirm + '</td>\n'
                                         + '<td>' + (response[i].confirm ? '' : '<button class="button btn btn-default" >Confirm</button>') + '</td>\n'
                                         + '<td>' + (response[i].confirm ? '<button class="button btn btn-primary">Complete</button>' : '') + '</td>\n'
                                         + '</tr>';
