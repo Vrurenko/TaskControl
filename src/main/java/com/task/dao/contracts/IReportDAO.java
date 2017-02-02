@@ -1,5 +1,8 @@
 package com.task.dao.contracts;
 
+import com.task.model.UserTaskInfo;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -12,4 +15,10 @@ public interface IReportDAO {
      * @return map of tasks and delays.
      */
     HashMap<String, Float> getTaskReport();
+
+    /**
+     * Returns the users task info list
+     * @return list of UserTaskInfo
+     */
+    ArrayList<UserTaskInfo> getUserTaskInfo();
 }

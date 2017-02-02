@@ -13,7 +13,9 @@ public class ReportController {
     private static Logger logger = Logger.getLogger(ReportController.class);
 
     @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
+    public ModelAndView downloadExcel(ModelMap model) {
+        model.addAttribute("taskDelay", AbstractDAOFactory.getDAOFactory().getReportDAO().getTaskReport());
+        model.addAttribute("userTaskInfo", AbstractDAOFactory.getDAOFactory().getReportDAO().getUserTaskInfo());
         logger.info("Forwarded to excelView");
         return new ModelAndView("excelView");
     }
@@ -22,6 +24,7 @@ public class ReportController {
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public String excelLoad(ModelMap model) {
         model.addAttribute("taskDelay", AbstractDAOFactory.getDAOFactory().getReportDAO().getTaskReport());
+        model.addAttribute("userTaskInfo", AbstractDAOFactory.getDAOFactory().getReportDAO().getUserTaskInfo());
         logger.info("Forwarded to report");
         return "report";
     }
